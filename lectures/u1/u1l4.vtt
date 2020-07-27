@@ -1,0 +1,1141 @@
+WEBVTT
+
+1
+00:00:02.402 --> 00:00:03.843
+In previous units,
+
+2
+00:00:03.843 --> 00:00:09.112
+we talked about how Boolean functions
+can be realized using logic gates.
+
+3
+00:00:09.112 --> 00:00:14.936
+And in this unit, we are going to talk
+about how we can actually build and
+
+4
+00:00:14.936 --> 00:00:18.303
+implement the logic
+gates using a formalism
+
+5
+00:00:18.303 --> 00:00:21.944
+called Hardware Description Language or
+HDL.
+
+6
+00:00:21.944 --> 00:00:28.631
+Once you build a logic gate in HDL,
+you can actually simulate it, test it.
+
+7
+00:00:28.631 --> 00:00:33.205
+And finally, build it in hardware
+as we now turn to describe.
+
+8
+00:00:33.205 --> 00:00:34.121
+All right.
+
+9
+00:00:34.121 --> 00:00:39.847
+So let's begin this journey from
+obstruction to implementation.
+
+10
+00:00:39.847 --> 00:00:47.442
+The first thing that you have to do as
+a gate architect is demand a full and
+
+11
+00:00:47.442 --> 00:00:53.281
+complete description of
+the desired gate's behavior.
+
+12
+00:00:53.281 --> 00:00:57.379
+And in this case, what we need
+is some sort of a truth table.
+
+13
+00:00:57.379 --> 00:01:00.294
+In the case of Xor,
+it's a very simple truth table.
+
+14
+00:01:00.294 --> 00:01:04.751
+And the truth table along with
+a gate diagram, gives you everything
+
+15
+00:01:04.751 --> 00:01:09.301
+that you need in order to understand
+what this chip is supposed to do.
+
+16
+00:01:09.301 --> 00:01:14.295
+And what we see here is also sometimes
+called the chip's interface.
+
+17
+00:01:14.295 --> 00:01:19.291
+And indeed, using this information,
+you can start writing an HDL file
+
+18
+00:01:19.291 --> 00:01:23.467
+that will look something
+like this example here.
+
+19
+00:01:23.467 --> 00:01:28.731
+So we start the HDL program or
+the HDL file with some documentation,
+
+20
+00:01:28.731 --> 00:01:33.392
+free-form, you know,
+you can write whatever you want there,
+
+21
+00:01:33.392 --> 00:01:36.957
+which describes what
+the gate is supposed to do.
+
+22
+00:01:36.957 --> 00:01:40.915
+And then we specify the name of the chip.
+
+23
+00:01:40.915 --> 00:01:45.919
+The names of the inputs of the chips and
+the names of chip's output.
+
+24
+00:01:45.919 --> 00:01:50.345
+And all this information,
+by the way, the name of the chip and
+
+25
+00:01:50.345 --> 00:01:54.476
+the names of its inputs and
+outputs is typically given to you.
+
+26
+00:01:54.476 --> 00:01:56.299
+You know,
+it's not something that you decide.
+
+27
+00:01:56.299 --> 00:02:01.151
+It's something which is part of
+the chip's contract, if you will.
+
+28
+00:02:01.151 --> 00:02:06.607
+So you simply write it up using this
+syntax and then you write the magic
+
+29
+00:02:06.607 --> 00:02:11.801
+word parts, which describes that
+here begins the segment of your
+
+30
+00:02:11.801 --> 00:02:18.076
+program in which you're going to describe
+how this chip is actually designed.
+
+31
+00:02:18.076 --> 00:02:21.870
+Now when you use such a chip,
+such Xor chip,
+
+32
+00:02:21.870 --> 00:02:26.295
+what we've seen so
+far is called a gate interface.
+
+33
+00:02:26.295 --> 00:02:33.040
+And notice that this is everything
+that I need in order to use Xor gate.
+
+34
+00:02:33.040 --> 00:02:37.498
+However, if I have to build this gate,
+well, that's a different story.
+
+35
+00:02:37.498 --> 00:02:41.853
+Now, I have to open up the black box and
+actually design it.
+
+36
+00:02:41.853 --> 00:02:46.276
+So when we use chips,
+we always wear two different hats.
+
+37
+00:02:46.276 --> 00:02:51.198
+There's the hat of the programmer
+who uses the chip, the chip part and
+
+38
+00:02:51.198 --> 00:02:54.653
+for this,
+all we need to know is the chip interface.
+
+39
+00:02:54.653 --> 00:02:58.294
+And there is the other
+hat of the chips builder,
+
+40
+00:02:58.294 --> 00:03:01.490
+which is what we're going to do now.
+
+41
+00:03:01.490 --> 00:03:08.329
+So moving alone, let's discuss how we
+actually build this chip from scratch.
+
+42
+00:03:08.329 --> 00:03:09.221
+All right.
+
+43
+00:03:09.221 --> 00:03:14.365
+So, actually we are not going to
+build it from scratch, we can if we,
+
+44
+00:03:14.365 --> 00:03:19.184
+if we need if we need to we can
+build it from a NAND gates only.
+
+45
+00:03:19.184 --> 00:03:25.560
+However, let us assume that we,
+we've already built
+
+46
+00:03:25.560 --> 00:03:29.585
+an and gate an or gate and, and not gate.
+
+47
+00:03:29.585 --> 00:03:34.235
+Well, if we built these gates or
+if someone gave us
+
+48
+00:03:34.235 --> 00:03:38.447
+these gates that we can freely use.
+
+49
+00:03:38.447 --> 00:03:39.967
+Here's what we can do.
+
+50
+00:03:39.967 --> 00:03:44.593
+We can inspect the truth table and
+figure out from the truth
+
+51
+00:03:44.593 --> 00:03:49.613
+table that the Xor functionality
+can be described as follows.
+
+52
+00:03:49.613 --> 00:03:53.131
+I mean, look at Xor,
+look at the truth table.
+
+53
+00:03:53.131 --> 00:03:56.962
+The gate outputs one in two cases only.
+
+54
+00:03:56.962 --> 00:04:02.731
+If if a and not b or if b and not a.
+
+55
+00:04:02.731 --> 00:04:08.989
+That is if a is true and b is false or
+if b is true and and a is false.
+
+56
+00:04:08.989 --> 00:04:13.263
+This sort of comes out,
+jumps out from the truth table.
+
+57
+00:04:13.263 --> 00:04:18.587
+You can either see it on your own or
+as Noam described in one of the previous
+
+58
+00:04:18.587 --> 00:04:23.472
+units, you can synthesize
+this this insight or
+
+59
+00:04:23.472 --> 00:04:27.779
+this, Boolean function
+from the table itself.
+
+60
+00:04:27.779 --> 00:04:31.755
+So, once you come up with this insight,
+
+61
+00:04:31.755 --> 00:04:37.059
+the next thing that you do is you
+think about it for a little while and
+
+62
+00:04:37.059 --> 00:04:43.499
+you come up with a gate logic diagram
+that describes how we can build this
+
+63
+00:04:43.499 --> 00:04:50.645
+Boolean function using basic logic gates
+that we already have to our disposal.
+
+64
+00:04:50.645 --> 00:04:56.155
+Now developing such diagrams is a matter
+of experience and the only way to,
+
+65
+00:04:56.155 --> 00:05:02.021
+to gain this expertise is to see many,
+many examples like, like this one.
+
+66
+00:05:02.021 --> 00:05:08.257
+So let's take this example and
+and explain it in in detail.
+
+67
+00:05:08.257 --> 00:05:13.182
+So the first thing that we can
+do is draw the boundary of
+
+68
+00:05:13.182 --> 00:05:18.112
+the chip diagram or
+the or the gate diagram.
+
+69
+00:05:18.112 --> 00:05:23.700
+So we use this dash to outline for
+this purpose and
+
+70
+00:05:23.700 --> 00:05:30.221
+what remains outside the boundary
+is the user's view of this gate.
+
+71
+00:05:30.221 --> 00:05:32.916
+In other word, the, the gate interface.
+
+72
+00:05:32.916 --> 00:05:37.760
+All the users knows is that he or
+she has a gate that has two inputs,
+
+73
+00:05:37.760 --> 00:05:41.361
+a and b, an output called out and
+altogether.
+
+74
+00:05:41.361 --> 00:05:47.446
+They somehow, this chip as if by magic,
+delivers Xor functionality.
+
+75
+00:05:47.446 --> 00:05:53.462
+So we draw this diagram and
+and this interface and
+
+76
+00:05:53.462 --> 00:05:59.594
+now we can delve more into
+the into the inner architecture.
+
+77
+00:05:59.594 --> 00:06:05.039
+So notice how the a signal
+is being copied and
+
+78
+00:06:05.039 --> 00:06:10.852
+sent simultaneously into
+two different destinations.
+
+79
+00:06:10.852 --> 00:06:15.995
+One of them is the and gate and
+the other one is and not gate.
+
+80
+00:06:15.995 --> 00:06:19.653
+This is perfectly okay in chip diagram.
+
+81
+00:06:19.653 --> 00:06:24.743
+And we see that the b signal undergoes
+the same the same treatment.
+
+82
+00:06:24.743 --> 00:06:31.349
+And in general, when you write HDL code,
+you are allowed to take any signal.
+
+83
+00:06:31.349 --> 00:06:35.536
+And distribute as many copies
+as you want of this signal
+
+84
+00:06:35.536 --> 00:06:38.709
+into as many destinations as you want.
+
+85
+00:06:38.709 --> 00:06:45.210
+This this wiring or
+these dispatching is done simultaneously.
+
+86
+00:06:45.210 --> 00:06:51.166
+So to use formal language
+HDL has unlimited thin out.
+
+87
+00:06:51.166 --> 00:06:56.831
+You can, you can thin out any given signal
+to as many destinations as you want.
+
+88
+00:06:56.831 --> 00:07:01.208
+And we do it we always do
+it when we write HDL code.
+
+89
+00:07:01.208 --> 00:07:02.346
+All right.
+
+90
+00:07:02.346 --> 00:07:10.542
+Moving along, notice that we're using
+some off the shelf gates and not and or.
+
+91
+00:07:10.542 --> 00:07:14.817
+Now whenever you use an off,
+off the shelf gate,
+
+92
+00:07:14.817 --> 00:07:19.404
+you are bound to use the names
+of the gate's input and
+
+93
+00:07:19.404 --> 00:07:22.651
+output as advertised, so to speak.
+
+94
+00:07:22.651 --> 00:07:27.439
+In other words, when you take the gate,
+gate off the shelf, the gate comes
+
+95
+00:07:27.439 --> 00:07:32.011
+along with what can be called
+the gate's signature or the gate's API.
+
+96
+00:07:32.011 --> 00:07:34.566
+So we have no degrees of freedom here.
+
+97
+00:07:34.566 --> 00:07:39.815
+We have to use the official
+names of the the inputs and
+
+98
+00:07:39.815 --> 00:07:43.069
+outputs of,
+of every one of our chip parts.
+
+99
+00:07:43.069 --> 00:07:48.281
+Now the next thing that we
+do is let's focus on the red
+
+100
+00:07:48.281 --> 00:07:50.905
+connections that we see here.
+
+101
+00:07:50.905 --> 00:07:55.976
+These are the connections that we draw
+in order to connect the different
+
+102
+00:07:55.976 --> 00:07:57.490
+chip parts together.
+
+103
+00:07:57.490 --> 00:08:03.060
+Now the rule is that every one of
+these connections has to be named and
+
+104
+00:08:03.060 --> 00:08:10.421
+it's our responsibility to come up with
+sensible names, so that's what we do.
+
+105
+00:08:10.421 --> 00:08:13.426
+We can call this particular
+connection not a,
+
+106
+00:08:13.426 --> 00:08:18.109
+which is a sensible name,
+I think a self-descriptive name.
+
+107
+00:08:18.109 --> 00:08:21.061
+We'll do the same thing with the not b.
+
+108
+00:08:21.061 --> 00:08:23.660
+We call this one a and not b.
+
+109
+00:08:23.660 --> 00:08:28.979
+We can call this one not b not a and
+b and, and that's it.
+
+110
+00:08:28.979 --> 00:08:34.377
+We, we, we have named all the internal
+connections in our architecture.
+
+111
+00:08:34.377 --> 00:08:40.751
+And we can actually now move on
+to describe this diagram in HDL.
+
+112
+00:08:40.751 --> 00:08:47.820
+So now we can actually move on and
+implement this diagram using HDL.
+
+113
+00:08:47.820 --> 00:08:54.600
+So we return to the HDL stub
+file that we had before.
+
+114
+00:08:54.600 --> 00:09:00.913
+And I use the term stub file to
+describe a partial HDL implementation,
+
+115
+00:09:00.913 --> 00:09:06.801
+so to speak that actually describes
+only the chip's interface.
+
+116
+00:09:06.801 --> 00:09:11.839
+And typically, it comes with
+the statement implementation missing or
+
+117
+00:09:11.839 --> 00:09:14.527
+put your code here and so on and so forth.
+
+118
+00:09:14.527 --> 00:09:18.069
+So this is the contract that
+we actually have to implement.
+
+119
+00:09:18.069 --> 00:09:24.121
+And now, indeed, we are going to focus on
+the implementation section of this file.
+
+120
+00:09:24.121 --> 00:09:29.779
+And basically,
+what we do is we begin to describe
+
+121
+00:09:29.779 --> 00:09:34.478
+the gate diagram one chip part at a time.
+
+122
+00:09:34.478 --> 00:09:39.801
+And for each one of the chip parts
+that we have, we write a single
+
+123
+00:09:39.801 --> 00:09:46.238
+HDL statement that describes the chip
+along with all its connections.
+
+124
+00:09:46.238 --> 00:09:52.379
+So we have two we happen
+to have two not chip parts.
+
+125
+00:09:52.379 --> 00:09:54.455
+So we describe them.
+
+126
+00:09:54.455 --> 00:09:59.357
+The first not has n equals a.
+
+127
+00:09:59.357 --> 00:10:00.401
+This is the input.
+
+128
+00:10:00.401 --> 00:10:03.779
+You know, the, the n input of
+the chip receives the a signal.
+
+129
+00:10:03.779 --> 00:10:09.620
+And the out,
+output of of the chip goes into not a.
+
+130
+00:10:09.620 --> 00:10:14.153
+We do similar with the,
+with the other not chip.
+
+131
+00:10:14.153 --> 00:10:16.759
+Then we described the two and chips.
+
+132
+00:10:16.759 --> 00:10:20.937
+And finally,
+we described the other or chip.
+
+133
+00:10:20.937 --> 00:10:23.822
+Notice by the way that they
+use the words gate and
+
+134
+00:10:23.822 --> 00:10:27.010
+chip interchangeably and
+that's perfectly okay.
+
+135
+00:10:27.010 --> 00:10:30.772
+A gate for me is simply a simple chip.
+
+136
+00:10:30.772 --> 00:10:31.992
+All right.
+
+137
+00:10:31.992 --> 00:10:37.532
+So this HDL diagram is nothing more than
+
+138
+00:10:37.532 --> 00:10:43.606
+a textural description
+of the gate diagram.
+
+139
+00:10:43.606 --> 00:10:49.710
+Did I say, HDL diagram, I, I meant the HDL
+file is a textural description of,
+
+140
+00:10:49.710 --> 00:10:54.260
+of the gate diagram that we
+see at the top of the slide.
+
+141
+00:10:54.260 --> 00:10:58.763
+Now, I'd like to to notice that
+once again, we have interface,
+
+142
+00:10:58.763 --> 00:11:00.340
+we have implementation.
+
+143
+00:11:00.340 --> 00:11:06.542
+And also note that the interface
+of the chip is unique, you know?
+
+144
+00:11:06.542 --> 00:11:11.512
+There's only one way to describe this
+chip and this is typically given to
+
+145
+00:11:11.512 --> 00:11:16.495
+us by whoever, you know,
+commissioned us to implement this chip.
+
+146
+00:11:16.495 --> 00:11:20.234
+At the same time,
+the implementation is not unique and
+
+147
+00:11:20.234 --> 00:11:26.338
+the same interface can be implemented in
+typically in many, many different ways.
+
+148
+00:11:26.338 --> 00:11:29.128
+For example, in the case of Xor,
+
+149
+00:11:29.128 --> 00:11:34.526
+we can implement the Xor chip
+using three logic gates only.
+
+150
+00:11:34.526 --> 00:11:38.589
+So and it doesn't really
+matter how exactly we do it.
+
+151
+00:11:38.589 --> 00:11:41.571
+We can, you can think about
+it on your own if you want.
+
+152
+00:11:41.571 --> 00:11:45.490
+But in general,
+there may be different implementations and
+
+153
+00:11:45.490 --> 00:11:48.282
+some of them will be less expensive.
+
+154
+00:11:48.282 --> 00:11:51.324
+They will contain less chip box,
+less connections.
+
+155
+00:11:51.324 --> 00:11:54.772
+Consume less energy and
+so on and so forth.
+
+156
+00:11:54.772 --> 00:11:59.509
+So the interface is unique and
+implementation varies.
+
+157
+00:11:59.509 --> 00:12:02.834
+Now, I'd like to use this opportunity to
+
+158
+00:12:02.834 --> 00:12:07.021
+make some general observations about,
+about HDL.
+
+159
+00:12:07.021 --> 00:12:11.395
+And for ease of reference I
+have placed in front of you
+
+160
+00:12:11.395 --> 00:12:14.325
+what we saw earlier in this unit.
+
+161
+00:12:14.325 --> 00:12:18.233
+The the gate diagram on the right-hand,
+hand side and
+
+162
+00:12:18.233 --> 00:12:21.371
+its HDL description on the left.
+
+163
+00:12:21.371 --> 00:12:24.332
+So what, what can we say about, about HDL?
+
+164
+00:12:24.332 --> 00:12:29.188
+First of all, we see that there
+are certain issues in HDL,
+
+165
+00:12:29.188 --> 00:12:35.253
+which are very similar to what we normally
+do in other programming languages.
+
+166
+00:12:35.253 --> 00:12:39.712
+We have to worry about good
+documentation of our HDL program,
+
+167
+00:12:39.712 --> 00:12:43.927
+just like we do when we write
+the program in Java or Python.
+
+168
+00:12:43.927 --> 00:12:47.468
+We have to come up with
+good descriptive names.
+
+169
+00:12:47.468 --> 00:12:52.442
+Both to the chips that we use and
+to the connections that
+
+170
+00:12:52.442 --> 00:12:57.331
+we that we create within the architecture.
+
+171
+00:12:57.331 --> 00:13:00.513
+So readability is terribly important.
+
+172
+00:13:00.513 --> 00:13:05.586
+You know, we have to make sure that our
+HDL code is self-descriptive and readable.
+
+173
+00:13:05.586 --> 00:13:08.802
+And in order to do it,
+we also use indentation.
+
+174
+00:13:08.802 --> 00:13:13.630
+You know and and
+make the code look real nice.
+
+175
+00:13:13.630 --> 00:13:20.063
+So, all of these things are expected from
+you when you write your own HDL programs.
+
+176
+00:13:20.063 --> 00:13:24.486
+In addition, there are certain things
+which are really unique to HDL.
+
+177
+00:13:24.486 --> 00:13:31.381
+First of all, HDL is a functional or
+declarative language.
+
+178
+00:13:31.381 --> 00:13:34.480
+There is no procedure going on.
+
+179
+00:13:34.480 --> 00:13:37.767
+There's no program execution going on.
+
+180
+00:13:37.767 --> 00:13:44.267
+It is nothing more than a static
+description of the gate diagram.
+
+181
+00:13:44.267 --> 00:13:49.460
+At the same time, you know,
+we assume that at some point this
+
+182
+00:13:49.460 --> 00:13:53.173
+descriptive code will go
+into some interpreter.
+
+183
+00:13:53.173 --> 00:13:58.159
+You know, it will go into,
+in our case into harder simulator that,
+
+184
+00:13:58.159 --> 00:14:01.395
+that can actually take
+this description and
+
+185
+00:14:01.395 --> 00:14:07.090
+start to sort of pipe values from
+the bottom all the way to the end.
+
+186
+00:14:07.090 --> 00:14:10.779
+So we assume there is some
+agent that will turn this
+
+187
+00:14:10.779 --> 00:14:15.287
+implementation into something that,
+that is actually working.
+
+188
+00:14:15.287 --> 00:14:19.619
+But this procedural part is
+not part of the HDL code,
+
+189
+00:14:19.619 --> 00:14:23.169
+you know, it's external to the HDL code.
+
+190
+00:14:23.169 --> 00:14:27.399
+So because HDL is a functional language,
+
+191
+00:14:27.399 --> 00:14:34.128
+we can actually write those HDL
+statements in any order that we wish.
+
+192
+00:14:34.128 --> 00:14:38.770
+You know, it doesn't matter if you begin
+to describe the not gate or the or gate,
+
+193
+00:14:38.770 --> 00:14:40.421
+it's completely up to you.
+
+194
+00:14:40.421 --> 00:14:46.750
+But it is typically it's
+customary to begin to describe
+
+195
+00:14:46.750 --> 00:14:53.448
+your diagram from left to right and
+this also makes the code more readable.
+
+196
+00:14:53.448 --> 00:14:58.726
+Also, note that each time we use
+an off the shelf gate, we commit
+
+197
+00:14:58.726 --> 00:15:04.459
+ourself to using the gate interface,
+that is the names of the input and
+
+198
+00:15:04.459 --> 00:15:09.017
+outputs that come along with
+the gate documentation.
+
+199
+00:15:09.017 --> 00:15:14.938
+Now, in the HEC computer that we're
+going to build in this course.
+
+200
+00:15:14.938 --> 00:15:21.545
+We decided as a matter of convention
+to almost always use the letters and
+
+201
+00:15:21.545 --> 00:15:27.395
+b for a two input chip and
+out for a single output chip.
+
+202
+00:15:27.395 --> 00:15:32.328
+And therefore, we are going to have
+
+203
+00:15:32.328 --> 00:15:38.913
+many chip connections that look
+like a equals a and out equals out.
+
+204
+00:15:38.913 --> 00:15:41.106
+Now, at the beginning, you know,
+
+205
+00:15:41.106 --> 00:15:46.098
+this formalism these conventions
+will look a little bit strange.
+
+206
+00:15:46.098 --> 00:15:48.758
+You know, what does it mean,
+a equals a, out equals out?
+
+207
+00:15:48.758 --> 00:15:53.373
+If you think about it a little bit and
+if you go back to consult these diagrams,
+
+208
+00:15:53.373 --> 00:15:56.721
+you will see that these
+connections make a lot of sense.
+
+209
+00:15:56.721 --> 00:16:03.141
+And actually, they are very convenient
+from a programming perspective.
+
+210
+00:16:03.141 --> 00:16:07.172
+You will realize that once
+you get your hands dirty and
+
+211
+00:16:07.172 --> 00:16:09.597
+write some HDL code of your own.
+
+212
+00:16:09.597 --> 00:16:14.174
+So, I'd like to end with
+some some comments about
+
+213
+00:16:14.174 --> 00:16:17.757
+hardware description languages in general.
+
+214
+00:16:17.757 --> 00:16:22.521
+There are many of them out there and
+yet, the two most popular
+
+215
+00:16:22.521 --> 00:16:27.301
+HDLs that at least I know of
+are VHDL are Veri, Verilog.
+
+216
+00:16:27.301 --> 00:16:30.332
+These are the languages which are used,
+
+217
+00:16:30.332 --> 00:16:35.694
+I think in 90% of
+hardware design projects.
+
+218
+00:16:35.694 --> 00:16:40.137
+But there are many other HDLs that
+are out there that can be used, as well.
+
+219
+00:16:40.137 --> 00:16:45.371
+Our own HDL is very similar in
+its spirit to the industrial
+
+220
+00:16:45.371 --> 00:16:50.520
+strength HDLs that I mentioned earlier,
+VHDL and Verilog.
+
+221
+00:16:50.520 --> 00:16:57.172
+And yet, it is a very minimal and
+simple version of these HDLs.
+
+222
+00:16:57.172 --> 00:17:02.212
+And for this reason, you can master
+it in something like one hour of
+
+223
+00:17:02.212 --> 00:17:08.524
+reading a tutorial and and beginning
+to write some HDL code of of your own.
+
+224
+00:17:08.524 --> 00:17:13.671
+And most importantly, our HDL along
+with our hardware simulator gives you
+
+225
+00:17:13.671 --> 00:17:19.320
+everything that you need in order to build
+the computer described in this course.
+
+226
+00:17:19.320 --> 00:17:23.216
+And actually, any other computer
+that you may want to build
+
+227
+00:17:23.216 --> 00:17:27.922
+using the knowledge that you will
+gain in the Nand2Tetris course.
+
+228
+00:17:27.922 --> 00:17:35.255
+So if you want read more about HDL and,
+and you should,.
+
+229
+00:17:35.255 --> 00:17:39.509
+Take a look at a Appendix A in
+the textbook and also read
+
+230
+00:17:40.643 --> 00:17:46.000
+the HDL Survival Guide in
+our Nand2Tetris website.
+
+231
+00:17:46.000 --> 00:17:49.876
+Both are, are actually available in,
+in the website.
+
+232
+00:17:49.876 --> 00:17:56.869
+And you may want to also take
+the hardware simulator tutorial and,
+
+233
+00:17:56.869 --> 00:18:01.532
+and learn how to actually read
+HDL descriptions and, and
+
+234
+00:18:01.532 --> 00:18:07.387
+execute the underlying logic
+of these HDL using simulation.
+
+235
+00:18:07.387 --> 00:18:13.691
+So this has been the unit in which
+we gave you a primer of HDL.
+
+236
+00:18:13.691 --> 00:18:17.812
+And in the next unit,
+we'll describe, once again,
+
+237
+00:18:17.812 --> 00:18:20.927
+how you can take your HDL designs and
+
+238
+00:18:20.927 --> 00:18:25.982
+bring them to life within the context
+of the hardware simulator.

@@ -1,0 +1,641 @@
+WEBVTT
+
+1
+00:00:04.720 --> 00:00:09.947
+>> So welcome to the prospective unit
+of week five in which we integrated
+
+2
+00:00:09.947 --> 00:00:14.878
+all the chips that we built before
+into a full blown computer system.
+
+3
+00:00:14.878 --> 00:00:19.710
+And during this week, we discussed
+two different computer architectures.
+
+4
+00:00:19.710 --> 00:00:23.795
+The Von Neumann architecture and
+the Harvard architecture.
+
+5
+00:00:23.795 --> 00:00:30.651
+So perhaps, we can start the, perspective
+unit by asking Neumann to summarize for
+
+6
+00:00:30.651 --> 00:00:35.960
+us the main architectural differences
+between Von Neumann and Harvard.
+
+7
+00:00:35.960 --> 00:00:39.249
+>> Well, in the, in our Hack computer,
+we had to separate,
+
+8
+00:00:39.249 --> 00:00:44.170
+read-only memory for the program and the
+separate data memory that was read-write.
+
+9
+00:00:44.170 --> 00:00:47.978
+Separating between these two
+different memories is sometimes
+
+10
+00:00:47.978 --> 00:00:52.427
+called the Harvard architecture and
+which I tend to view as just a flavor,
+
+11
+00:00:52.427 --> 00:00:54.961
+if you wish of Von Neumann architecture.
+
+12
+00:00:54.961 --> 00:00:57.248
+In a classic Von Neumann architecture,
+
+13
+00:00:57.248 --> 00:01:02.090
+you have a single memory that contains
+both the data and the program.
+
+14
+00:01:02.090 --> 00:01:06.932
+As we explained in the second unit of this
+week doing it the classical way has a tiny
+
+15
+00:01:06.932 --> 00:01:10.635
+complication that you need to
+separately fetch an instruction,
+
+16
+00:01:10.635 --> 00:01:12.878
+that is access a program instruction.
+
+17
+00:01:12.878 --> 00:01:16.033
+And separately at a different
+time at the next cycle,
+
+18
+00:01:16.033 --> 00:01:21.735
+execute the program which to, which to
+required for a, accessing the data memory.
+
+19
+00:01:21.735 --> 00:01:25.711
+In our Harvard architecture, we had
+the program in a separate memory unit.
+
+20
+00:01:25.711 --> 00:01:31.010
+Basically, we could do both of them in a
+single cycle, which made it a bit simpler.
+
+21
+00:01:31.010 --> 00:01:35.033
+Now this architecture, as is,
+is probably a very appropriate for
+
+22
+00:01:35.033 --> 00:01:39.124
+sometimes what's called embedded
+computers, where for computer does
+
+23
+00:01:39.124 --> 00:01:42.961
+a single thing that was pre-programmed
+to it and just put in to ROM.
+
+24
+00:01:42.961 --> 00:01:47.598
+A general purpose computer in which you
+want to keep on changing the program that
+
+25
+00:01:47.598 --> 00:01:52.128
+you run, you would probably need the full,
+real Von Neumann architecture.
+
+26
+00:01:52.128 --> 00:01:57.070
+The differences are not that big
+between these two architectures,
+
+27
+00:01:57.070 --> 00:02:02.190
+as we saw in a unit two of this week and
+we chose to take the simplest one.
+
+28
+00:02:02.190 --> 00:02:05.045
+Again, keeping with the simplicity
+of our whole approach.
+
+29
+00:02:05.045 --> 00:02:10.468
+>> So normally, if I understood your
+explanation one implication from Harvard
+
+30
+00:02:10.468 --> 00:02:15.446
+to Von Neumann architecture is that in
+Von Neumann, we expect the computer to do
+
+31
+00:02:15.446 --> 00:02:19.711
+different things at different cycles or
+different points of time.
+
+32
+00:02:19.711 --> 00:02:24.066
+So, is there some organized
+way in computer science to
+
+33
+00:02:24.066 --> 00:02:29.045
+to model this this different
+behavior of computers?
+
+34
+00:02:29.045 --> 00:02:30.210
+>> Absolutely.
+
+35
+00:02:30.210 --> 00:02:34.545
+The standard way of doing it is via
+the formalism of the finite machine.
+
+36
+00:02:34.545 --> 00:02:38.095
+A specification of the different things
+that the computer is supposed to do at
+
+37
+00:02:38.095 --> 00:02:39.297
+different times steps and
+
+38
+00:02:39.297 --> 00:02:42.045
+how we're supposed to move
+from one statement to another.
+
+39
+00:02:42.045 --> 00:02:43.700
+Let me demonstrate.
+
+40
+00:02:43.700 --> 00:02:45.318
+Okay.
+So the idea is that for
+
+41
+00:02:45.318 --> 00:02:50.438
+every possible state that the machine
+can be in, you have a type of circle and
+
+42
+00:02:50.438 --> 00:02:54.598
+you have arrows between the different,
+different circles or
+
+43
+00:02:54.598 --> 00:02:58.598
+between the different states
+of the machine that tell you,
+
+44
+00:02:58.598 --> 00:03:02.460
+from which state do you move
+to which other state and why.
+
+45
+00:03:03.470 --> 00:03:07.652
+In each state, you can write what are the
+kind of thing that the machine needs to do
+
+46
+00:03:07.652 --> 00:03:08.711
+in that situation.
+
+47
+00:03:08.711 --> 00:03:15.076
+For example, maybe in this state, you want
+to add one to the program counter and
+
+48
+00:03:15.076 --> 00:03:19.545
+maybe you want a certain
+address to get a certain value.
+
+49
+00:03:19.545 --> 00:03:24.628
+For example, the value from
+the memory address, address by n.
+
+50
+00:03:24.628 --> 00:03:26.630
+And so, on every different state,
+
+51
+00:03:26.630 --> 00:03:29.650
+you can write this information
+in terms of the state.
+
+52
+00:03:30.900 --> 00:03:34.599
+This gives you a very clear picture of
+what needs to be done in every possible
+
+53
+00:03:34.599 --> 00:03:35.480
+state and where,
+
+54
+00:03:35.480 --> 00:03:39.545
+what kind of state do you move for, do you
+move to after everything that happened?
+
+55
+00:03:39.545 --> 00:03:44.283
+For example, you may move from here
+to here, if the clock if the current
+
+56
+00:03:44.283 --> 00:03:48.670
+clock cycle changed or if the current
+memory location has value zero.
+
+57
+00:03:48.670 --> 00:03:53.050
+Or various other situations, that are,
+can be found in the Harvard.
+
+58
+00:03:53.050 --> 00:03:55.461
+The values of the different
+hardware logic.
+
+59
+00:03:55.461 --> 00:03:59.992
+So, once you specify this and this kind of
+way formalism in this kind of finite state
+
+60
+00:03:59.992 --> 00:04:04.006
+machine formalism, now we can translate
+this to the normal registers and
+
+61
+00:04:04.006 --> 00:04:07.120
+combinatorial logics that we already know.
+
+62
+00:04:07.120 --> 00:04:13.295
+The trick would be to simply add
+another register that is called state.
+
+63
+00:04:13.295 --> 00:04:17.620
+A register that will encode in which
+one of these cycles are we in.
+
+64
+00:04:17.620 --> 00:04:21.586
+In our situation, we'll need 2 bits
+to encode three possible states.
+
+65
+00:04:21.586 --> 00:04:22.940
+So we'll have here 2 bits.
+
+66
+00:04:24.220 --> 00:04:26.213
+Once we have this state register,
+
+67
+00:04:26.213 --> 00:04:31.170
+now we can write combinatoty logics that
+basically affects everything that we need.
+
+68
+00:04:31.170 --> 00:04:36.997
+So for example, if the 2 bits this is just
+a register is has 2 bits going in and
+
+69
+00:04:36.997 --> 00:04:39.130
+2 bits going out.
+
+70
+00:04:39.130 --> 00:04:43.355
+But all the combinatorial logic that we
+have can also accept the state as part of
+
+71
+00:04:43.355 --> 00:04:44.004
+its input.
+
+72
+00:04:44.004 --> 00:04:48.129
+Like it accepts counter and so on.
+
+73
+00:04:48.129 --> 00:04:52.421
+Different combinatorial parts of our
+computer, accepts various inputs.
+
+74
+00:04:52.421 --> 00:04:55.295
+Now they also have this input, the state.
+
+75
+00:04:55.295 --> 00:04:59.434
+And of course, they can do different
+things according to the different state,
+
+76
+00:04:59.434 --> 00:05:02.295
+including deciding what
+the next state is going to be.
+
+77
+00:05:02.295 --> 00:05:04.686
+Again, it's a function
+of the current state and
+
+78
+00:05:04.686 --> 00:05:07.086
+all the other hardware
+signals in the computer.
+
+79
+00:05:07.086 --> 00:05:11.719
+So the way you translate from this
+formalism from the finite state machine
+
+80
+00:05:11.719 --> 00:05:16.212
+formalism to this actual implementation
+is pretty straight forward.
+
+81
+00:05:16.212 --> 00:05:18.836
+And and oh, completely technical,
+if you wish.
+
+82
+00:05:18.836 --> 00:05:21.434
+Once you actually coded everything,
+
+83
+00:05:21.434 --> 00:05:25.420
+it's just like you organized
+hardware previously.
+
+84
+00:05:25.420 --> 00:05:29.336
+And that's an organized way to design
+computers that do different things
+
+85
+00:05:29.336 --> 00:05:30.464
+in different times and
+
+86
+00:05:30.464 --> 00:05:34.462
+move between the different times and
+different states in an organized manner.
+
+87
+00:05:34.462 --> 00:05:39.670
+>> One question that typically comes up
+when we teach this part of the course
+
+88
+00:05:39.670 --> 00:05:44.211
+is that the Hack computer can
+interact with a keyboard and screen.
+
+89
+00:05:44.211 --> 00:05:49.230
+And the question is what does it
+take to connect a computer to more
+
+90
+00:05:49.230 --> 00:05:54.045
+peripheral devices you know,
+in addition to a keyboard and a screen?
+
+91
+00:05:54.045 --> 00:05:58.793
+So indeed,
+real computers have many peripheral
+
+92
+00:05:58.793 --> 00:06:03.538
+units which are the screen, the keyboard,
+
+93
+00:06:03.538 --> 00:06:08.420
+a mouse, a microphone,
+a disk and so on so forth.
+
+94
+00:06:08.420 --> 00:06:10.620
+And also this architecture is scalable.
+
+95
+00:06:10.620 --> 00:06:13.989
+We can add more devices as we please and
+
+96
+00:06:13.989 --> 00:06:17.628
+the question in there is
+how can you possibly do it?
+
+97
+00:06:17.628 --> 00:06:22.310
+Well just like we did with the screen and
+the keyboard,
+
+98
+00:06:22.310 --> 00:06:28.780
+we can allocate memory space to represent
+every one of these peripheral devices.
+
+99
+00:06:28.780 --> 00:06:33.489
+And when we want to write something, for
+instance when we want to sound something
+
+100
+00:06:33.489 --> 00:06:36.397
+on the microphone or
+write something to the disk,
+
+101
+00:06:36.397 --> 00:06:41.588
+we can write into memory certain codes
+that are later later, will be translated
+
+102
+00:06:41.588 --> 00:06:46.753
+into physical signals that actually
+operate these peripheral devices.
+
+103
+00:06:46.753 --> 00:06:51.717
+But at some point, when you add
+several such peripheral devices,
+
+104
+00:06:51.717 --> 00:06:54.545
+the CPU becomes extremely overloaded.
+
+105
+00:06:54.545 --> 00:06:58.276
+Because the poor CPU has to
+not only run your program, but
+
+106
+00:06:58.276 --> 00:07:01.169
+also manage all these peripheral devices.
+
+107
+00:07:01.169 --> 00:07:06.935
+So the typical approach is to offload
+the CPU from all this headache and
+
+108
+00:07:06.935 --> 00:07:09.961
+use what is known as device controllers.
+
+109
+00:07:09.961 --> 00:07:13.086
+So typically, when you add,
+for example, a disk.
+
+110
+00:07:13.086 --> 00:07:20.030
+The disk will be equipped with device
+controller, which is a dedicated hardware,
+
+111
+00:07:20.030 --> 00:07:26.202
+which knows how to manage the disk, which
+knows how to translate operations from
+
+112
+00:07:26.202 --> 00:07:31.336
+what the CPU wants to do to actual
+movements of the disk an, and so on.
+
+113
+00:07:31.336 --> 00:07:36.680
+And something like this happens
+with every particular I/O device.
+
+114
+00:07:36.680 --> 00:07:38.336
+And for example, take the screen.
+
+115
+00:07:38.336 --> 00:07:43.545
+In the, Hack platform, the screen is
+managed in a very simplistic way.
+
+116
+00:07:43.545 --> 00:07:47.760
+When you want to turn on and
+off a pixel, you simply turn on and
+
+117
+00:07:47.760 --> 00:07:49.503
+off a bit in memory.
+
+118
+00:07:49.503 --> 00:07:54.439
+And you assume that at some point
+this this manipulation will
+
+119
+00:07:54.439 --> 00:07:59.171
+be refreshed or will,
+will cause the screen to be refreshed.
+
+120
+00:07:59.171 --> 00:08:01.670
+So the CPU is in charge for every thing.
+
+121
+00:08:01.670 --> 00:08:07.574
+If you want to draw a line, the CPU has to
+actually write all these points all these
+
+122
+00:08:07.574 --> 00:08:13.503
+bits into memory and, and the line will
+get drawn at a certain point of time.
+
+123
+00:08:13.503 --> 00:08:18.337
+In a real computer the screen comes
+equipped with a graphics card or
+
+124
+00:08:18.337 --> 00:08:21.077
+some graphics accelerator and
+
+125
+00:08:21.077 --> 00:08:26.337
+this is a dedicated computer that can
+do all sorts of things internally.
+
+126
+00:08:26.337 --> 00:08:29.837
+So if we want to draw a line
+from one coordinate to another,
+
+127
+00:08:29.837 --> 00:08:34.064
+we can simply tell the controller go
+ahead and do it and the controller will,
+
+128
+00:08:34.064 --> 00:08:38.225
+you know, will do everything,
+which is necessary to compute, you know,
+
+129
+00:08:38.225 --> 00:08:41.295
+which pixels have to be turned on and
+off and so on.
+
+130
+00:08:41.295 --> 00:08:47.211
+So, once again,
+we can add many I/O devices as we please.
+
+131
+00:08:47.211 --> 00:08:51.161
+U, in principle, it will be very similar
+to what we did with the screen and
+
+132
+00:08:51.161 --> 00:08:52.003
+the keyboard.
+
+133
+00:08:52.003 --> 00:08:54.643
+But there are numerous details involved,
+
+134
+00:08:54.643 --> 00:08:58.080
+which are specific to all
+these different devices.

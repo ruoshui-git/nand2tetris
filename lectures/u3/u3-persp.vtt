@@ -1,0 +1,853 @@
+WEBVTT
+
+1
+00:00:03.186 --> 00:00:07.710
+>> Welcome to the perspective unit of
+week three in which we do two things.
+
+2
+00:00:07.710 --> 00:00:10.520
+First of all,
+we answer frequently asked questions
+
+3
+00:00:10.520 --> 00:00:14.090
+that typically come up when we
+teach how to build memory systems.
+
+4
+00:00:14.090 --> 00:00:18.090
+And, we use this opportunity also
+to say also some disclaimers
+
+5
+00:00:18.090 --> 00:00:21.410
+about various things that we
+covered during this week.
+
+6
+00:00:21.410 --> 00:00:26.470
+So, the first question that I'd
+like to talk about is as follows.
+
+7
+00:00:26.470 --> 00:00:30.940
+During this week, we used flip flop
+gates without actually building them.
+
+8
+00:00:30.940 --> 00:00:35.210
+We treated them as black box abstractions.
+
+9
+00:00:35.210 --> 00:00:39.330
+What does it take to
+actually build a flip flop?
+
+10
+00:00:39.330 --> 00:00:42.530
+So, Norm,
+maybe you will take this question.
+
+11
+00:00:42.530 --> 00:00:44.510
+>> In many courses on computer hardware,
+
+12
+00:00:44.510 --> 00:00:49.500
+students are taught on how to construct
+flip flop gates from basic NAND gates.
+
+13
+00:00:49.500 --> 00:00:52.160
+Once that is done,
+they continue with the usual thing,
+
+14
+00:00:52.160 --> 00:00:55.604
+which is also done in practice of
+a complete separation between the way you
+
+15
+00:00:55.604 --> 00:00:59.680
+use combinatorial circuiting and
+the way you use sequential circuiting.
+
+16
+00:00:59.680 --> 00:01:04.430
+But in the beginning, they do construct
+the, a flip-flop from basic NAND gates.
+
+17
+00:01:04.430 --> 00:01:09.310
+In our course, we decided to skip that
+part and really focus on at the beginning
+
+18
+00:01:09.310 --> 00:01:11.750
+and the difference between
+the combinatorial point of view and
+
+19
+00:01:11.750 --> 00:01:13.460
+the sequential point of view.
+
+20
+00:01:13.460 --> 00:01:18.680
+Nevertheless, it is probably a good idea
+to see the main trick how can you get
+
+21
+00:01:18.680 --> 00:01:21.270
+NAND gates to remember anything.
+
+22
+00:01:21.270 --> 00:01:22.850
+And, this is as follows.
+
+23
+00:01:22.850 --> 00:01:26.420
+So, the basic idea is to take two NAND
+gates and connect them in a loop.
+
+24
+00:01:26.420 --> 00:01:34.167
+[SOUND] So, we have here two inputs,
+
+25
+00:01:34.167 --> 00:01:42.184
+each one fitting into one NAND gate.
+
+26
+00:01:42.184 --> 00:01:47.540
+Where the other input of the NAND gate is
+fed the output of the previous NAND gate.
+
+27
+00:01:47.540 --> 00:01:49.270
+Now normally, this is a no-no.
+
+28
+00:01:49.270 --> 00:01:53.130
+You're not supposed to,
+to connect combinatorial gates in a loop.
+
+29
+00:01:53.130 --> 00:01:57.620
+In fact, the hardware simulator we give
+in this course explicitly forbids it, and
+
+30
+00:01:57.620 --> 00:01:58.830
+this is done for pedagogic reasons.
+
+31
+00:02:00.030 --> 00:02:02.600
+Now, let us see how this thing works
+
+32
+00:02:02.600 --> 00:02:04.770
+in this particular case
+where it's actually used.
+
+33
+00:02:05.840 --> 00:02:08.950
+So normally, this kind of circuit
+is supposed to be used when
+
+34
+00:02:08.950 --> 00:02:10.650
+both of its inputs are set to one.
+
+35
+00:02:12.790 --> 00:02:17.150
+Now in this situation, we don't know what
+this non gate will do because we don't yet
+
+36
+00:02:17.150 --> 00:02:18.970
+know what this input is.
+
+37
+00:02:18.970 --> 00:02:23.180
+So, because we don't know what the
+previous value, or the previous there is
+
+38
+00:02:23.180 --> 00:02:26.840
+no real previous here, but
+we don't know what the value here is.
+
+39
+00:02:26.840 --> 00:02:28.730
+So, we don't know what
+the value of the input is and
+
+40
+00:02:28.730 --> 00:02:32.740
+we don't know what the value of the output
+is, so at the beginning, we know nothing.
+
+41
+00:02:32.740 --> 00:02:35.520
+But then, what happens once we
+take one of these inputs and
+
+42
+00:02:35.520 --> 00:02:37.060
+turn it to zero for a while?
+
+43
+00:02:38.430 --> 00:02:40.340
+At this point,
+because this is a NAND gate,
+
+44
+00:02:40.340 --> 00:02:45.910
+we can immediately see that the output
+of this gate is going to be one,
+
+45
+00:02:45.910 --> 00:02:50.180
+independently of what
+this question mark was.
+
+46
+00:02:50.180 --> 00:02:52.930
+Once this is 1,
+we know that this is going to be 1,
+
+47
+00:02:52.930 --> 00:02:55.369
+the output of this NAND
+gate is going to be 0.
+
+48
+00:02:56.880 --> 00:03:01.610
+Now once this is zero, we can fill in
+this question mark and make it zero.
+
+49
+00:03:01.610 --> 00:03:04.960
+And then, we have two zeros as our output
+one and everything is very stable here.
+
+50
+00:03:06.470 --> 00:03:08.800
+Now so, what's so interesting about it?
+
+51
+00:03:08.800 --> 00:03:13.310
+Now, let us see what happens when this
+input is go, goes up back to one.
+
+52
+00:03:14.720 --> 00:03:16.060
+In this case, nothing changes.
+
+53
+00:03:17.300 --> 00:03:20.250
+Because this is a NAND gate,
+this output remains one, so
+
+54
+00:03:20.250 --> 00:03:23.600
+these two remain one these remain zero,
+these remain zero.
+
+55
+00:03:23.600 --> 00:03:25.460
+And, everything is completely stable.
+
+56
+00:03:25.460 --> 00:03:29.130
+So somehow, we remember now that the last
+
+57
+00:03:29.130 --> 00:03:32.850
+input that became zero was this
+one because we have a zero here.
+
+58
+00:03:32.850 --> 00:03:35.160
+Now, let us see what happens
+when something changes.
+
+59
+00:03:35.160 --> 00:03:37.300
+For example,
+where at a different time stamp,
+
+60
+00:03:37.300 --> 00:03:40.480
+at the future time point,
+this one becomes zero.
+
+61
+00:03:41.840 --> 00:03:46.280
+Now once this becomes zero, this
+immediately, the output here becomes one.
+
+62
+00:03:50.650 --> 00:03:51.968
+The output here becomes one.
+
+63
+00:03:51.968 --> 00:03:53.230
+This becomes one.
+
+64
+00:03:53.230 --> 00:03:54.009
+The output here becomes zero.
+
+65
+00:03:54.009 --> 00:03:54.890
+The output here becomes zero.
+
+66
+00:03:54.890 --> 00:04:00.190
+This changes to zero, and again this
+stays one, so we're again stable.
+
+67
+00:04:02.010 --> 00:04:06.602
+Now, when we turn this back to one,
+to the normal state of one,
+
+68
+00:04:06.602 --> 00:04:11.210
+everything remains the same
+because one and zero is still one.
+
+69
+00:04:11.210 --> 00:04:15.010
+So, everything is completely
+stable in this new situation,
+
+70
+00:04:15.010 --> 00:04:18.036
+which is different than the previous
+one because now we have zero here and
+
+71
+00:04:18.036 --> 00:04:21.490
+one here, where previously,
+we had the opposite value.
+
+72
+00:04:21.490 --> 00:04:25.085
+So now,
+we remember that the last input that had,
+
+73
+00:04:25.085 --> 00:04:28.010
+was, went down to zero was the bottom one.
+
+74
+00:04:29.360 --> 00:04:34.130
+And, this kind of behavior
+allows this loop basically
+
+75
+00:04:34.130 --> 00:04:38.970
+to remember the last input wires
+that went to zero, and it's stable
+
+76
+00:04:38.970 --> 00:04:43.350
+in each of two different situations
+that's why, why flip flop is called.
+
+77
+00:04:43.350 --> 00:04:45.620
+Why this,
+that's why the name is flip flop.
+
+78
+00:04:45.620 --> 00:04:49.390
+It can either flip, so
+we have zero here and one here, or
+
+79
+00:04:49.390 --> 00:04:52.340
+flop, that we have one here and zero here.
+
+80
+00:04:52.340 --> 00:04:54.170
+In any case, a change,
+
+81
+00:04:54.170 --> 00:04:58.840
+a momentary change in the input
+changes the output for the future.
+
+82
+00:04:58.840 --> 00:05:02.700
+Now, this is just a basic functionality
+that gets you to remember stuff.
+
+83
+00:05:02.700 --> 00:05:06.790
+Of course, when you want to actually
+use this in a nice flip flop
+
+84
+00:05:06.790 --> 00:05:11.700
+like we have used the flip flop, you first
+of all need to put something around it,
+
+85
+00:05:11.700 --> 00:05:14.470
+which actually makes sure that
+the inputs are behaving nicely.
+
+86
+00:05:14.470 --> 00:05:17.710
+And the, I choose which one of
+the outputs you want to take.
+
+87
+00:05:17.710 --> 00:05:23.040
+And also, you need to actually
+have somehow, separate the,
+
+88
+00:05:23.040 --> 00:05:27.900
+what happens within one clock cycle,
+from what happens in the next clock cycle.
+
+89
+00:05:27.900 --> 00:05:30.780
+And, that is done by usually by
+putting another one of these and
+
+90
+00:05:30.780 --> 00:05:34.920
+driving one of them with a clock, and the
+another with the opposite of the clock.
+
+91
+00:05:34.920 --> 00:05:37.560
+But, we don't want to get
+into these details, but
+
+92
+00:05:37.560 --> 00:05:41.330
+just to show the basic idea,
+which is quite surprising
+
+93
+00:05:41.330 --> 00:05:44.700
+how you can remember something even
+though you only have a NAND gate.
+
+94
+00:05:44.700 --> 00:05:50.310
+So, thank you, Naan for this explanation,
+which indeed was somewhat intricate.
+
+95
+00:05:50.310 --> 00:05:54.980
+And a follow up question that
+typically comes up is that
+
+96
+00:05:54.980 --> 00:06:00.280
+is NAND gate the only basic technology for
+building memory systems today?
+
+97
+00:06:00.280 --> 00:06:04.440
+>> Well, Shimun, the truth is this is not
+the only way to construct flip flops.
+
+98
+00:06:04.440 --> 00:06:07.730
+In many other cases,
+flip flops are constructed
+
+99
+00:06:07.730 --> 00:06:12.350
+using some basic physical properties of
+the underlying solid state physics, that,
+
+100
+00:06:12.350 --> 00:06:15.950
+of the devices that are used for
+this kind of storage.
+
+101
+00:06:15.950 --> 00:06:21.560
+Now, this kind of details of such devices
+and how they remember anything is really
+
+102
+00:06:21.560 --> 00:06:26.320
+physics or electrical engineering and not
+something that we touch in this course.
+
+103
+00:06:26.320 --> 00:06:28.520
+>> Okay, so here's the next question.
+
+104
+00:06:28.520 --> 00:06:34.390
+During this week, we built a memory
+device which you called RAM.
+
+105
+00:06:34.390 --> 00:06:37.330
+Is this the only memory device
+that the computers use?
+
+106
+00:06:38.340 --> 00:06:40.630
+Well, the answer is definitely not.
+
+107
+00:06:40.630 --> 00:06:43.614
+Computers use various kinds of
+
+108
+00:06:43.614 --> 00:06:49.250
+memory devices of which the RAM
+is indeed the most important one.
+
+109
+00:06:49.250 --> 00:06:56.390
+The RAM, which stands for random access
+memory stores both data and instructions.
+
+110
+00:06:56.390 --> 00:07:02.950
+And, it is a volatile device, meaning that
+it depends on an external power supply.
+
+111
+00:07:02.950 --> 00:07:06.060
+So, once you disconnect the computer
+from the power supply or
+
+112
+00:07:06.060 --> 00:07:11.740
+turn it off, the contents of
+the RAM is effectively erased.
+
+113
+00:07:11.740 --> 00:07:16.780
+So, in addition to the RAM unit,
+computers also typically
+
+114
+00:07:16.780 --> 00:07:22.710
+use another device called ROM,
+which stands for read only memory.
+
+115
+00:07:22.710 --> 00:07:25.850
+So, the ROM is not only read-only,
+
+116
+00:07:25.850 --> 00:07:30.030
+it is also a non-volatile device,
+unlike the RAM.
+
+117
+00:07:30.030 --> 00:07:35.340
+Which means that it maintains its
+current contents a long time,
+
+118
+00:07:35.340 --> 00:07:40.500
+over time and it does not depend
+on an external power supply.
+
+119
+00:07:40.500 --> 00:07:45.950
+Which makes it very convenient because
+the ROM is where you want to put
+
+120
+00:07:45.950 --> 00:07:48.880
+the programs that have to work
+when you turn on the computer.
+
+121
+00:07:48.880 --> 00:07:51.680
+You know, this is what is
+known as the booting process.
+
+122
+00:07:51.680 --> 00:07:55.750
+So, when you boot up the computer,
+the program, which is stored or
+
+123
+00:07:55.750 --> 00:07:57.800
+pre stored in the ROM starts running.
+
+124
+00:07:57.800 --> 00:08:03.220
+And, this program normally
+initializes all sorts of things,
+
+125
+00:08:03.220 --> 00:08:05.790
+in the operating system and
+in the computer.
+
+126
+00:08:05.790 --> 00:08:09.200
+Actually, not in the operating system,
+but in lower level code.
+
+127
+00:08:09.200 --> 00:08:13.430
+And, the next thing that the ROM does is
+or the program that resides in the ROM
+
+128
+00:08:13.430 --> 00:08:18.980
+does, it clones from the disc the startup
+code of the operating system.
+
+129
+00:08:18.980 --> 00:08:23.080
+And then finally, we begin to see
+some windows on the screen and
+
+130
+00:08:23.080 --> 00:08:26.980
+the computer sort of comes alive.
+
+131
+00:08:26.980 --> 00:08:32.220
+Another technology which you've probably
+heard of is called flash memory.
+
+132
+00:08:32.220 --> 00:08:36.580
+And, flash memory is is
+a technology which actually
+
+133
+00:08:36.580 --> 00:08:41.800
+combines the good things of
+both the RAM and the ROM.
+
+134
+00:08:41.800 --> 00:08:44.750
+On the one hand it's
+a read read write memory.
+
+135
+00:08:44.750 --> 00:08:48.360
+You can both read and modify its contents.
+
+136
+00:08:48.360 --> 00:08:53.010
+And at the same time it does not depend
+on an external power supply like the ROM.
+
+137
+00:08:53.010 --> 00:08:55.850
+So, once you turn off the computer.
+
+138
+00:08:55.850 --> 00:08:59.880
+The contents of the flash
+memory remains intact.
+
+139
+00:08:59.880 --> 00:09:03.770
+So, we talked about RAM, ROM, flash.
+
+140
+00:09:03.770 --> 00:09:10.130
+Another kind of memory which which you
+normally encounter is called cache memory.
+
+141
+00:09:10.130 --> 00:09:13.890
+So, the question is, what is cache
+memory and why do we need it?
+
+142
+00:09:13.890 --> 00:09:16.070
+>> When one actually builds a computer,
+
+143
+00:09:16.070 --> 00:09:20.150
+the memory is going to be a pretty
+costly part of the whole system.
+
+144
+00:09:20.150 --> 00:09:22.840
+And as you can expect,
+there are many different technologies for
+
+145
+00:09:22.840 --> 00:09:24.230
+building memories.
+
+146
+00:09:24.230 --> 00:09:27.960
+And, the faster the memory,
+is the more expensive it usually is.
+
+147
+00:09:27.960 --> 00:09:32.080
+The larger the memory,
+the more expensive it usually is.
+
+148
+00:09:32.080 --> 00:09:37.340
+So, an architect, a computer architect
+is always faced with a trade off of
+
+149
+00:09:37.340 --> 00:09:42.280
+that we want to put more money into
+the memory and make it larger and faster.
+
+150
+00:09:42.280 --> 00:09:44.460
+Or, does we want to get a cheaper memory,
+
+151
+00:09:44.460 --> 00:09:48.090
+and maybe put the money more
+in the processing unit?
+
+152
+00:09:48.090 --> 00:09:52.040
+A usual tradeoff is to have a large,
+cheap memory,
+
+153
+00:09:52.040 --> 00:09:56.480
+maybe slow also, and a very small,
+expensive, fast memory.
+
+154
+00:09:57.530 --> 00:10:01.550
+And, try to make sure that what the,
+that does it is very often need,
+
+155
+00:10:01.550 --> 00:10:05.880
+need used by the processor
+reside in the very fast memory,
+
+156
+00:10:05.880 --> 00:10:09.860
+while the data that is only rarely
+used resides in the slow memory.
+
+157
+00:10:09.860 --> 00:10:12.780
+because this way,
+you get the speed of a very fast memory,
+
+158
+00:10:12.780 --> 00:10:14.880
+while you have the size
+of a very cheap memory.
+
+159
+00:10:15.940 --> 00:10:18.310
+To do this correctly is
+a very intricate art, and
+
+160
+00:10:18.310 --> 00:10:21.880
+today computers have whole
+hierarchies of caches.
+
+161
+00:10:21.880 --> 00:10:25.480
+These are called caches, the small,
+fast memories called the cache.
+
+162
+00:10:25.480 --> 00:10:28.080
+Hierarchies of such caches
+that are faster and
+
+163
+00:10:28.080 --> 00:10:31.930
+faster and expensive, more expensive and
+more expensive and smaller and
+
+164
+00:10:31.930 --> 00:10:35.125
+smaller, as they get
+closer to the processor.
+
+165
+00:10:35.125 --> 00:10:39.054
+And, doing that correctly allows
+you to really get amazing eh,
+
+166
+00:10:39.054 --> 00:10:42.955
+effective speed of a very fast memory,
+
+167
+00:10:42.955 --> 00:10:47.135
+even though there is only a very small
+fast memory, and a very large slow memory.
+
+168
+00:10:48.185 --> 00:10:51.545
+>> Okay.
+So, thank you Noam for this explanation.
+
+169
+00:10:51.545 --> 00:10:59.140
+And indeed from a physical standpoint, we
+have many different kinds of memory units.
+
+170
+00:10:59.140 --> 00:11:05.368
+And we discuss some of them in this
+in this perspective discussion.
+
+171
+00:11:05.368 --> 00:11:10.250
+And yet, it's important to emphasize
+that from a logical perspective, all
+
+172
+00:11:10.250 --> 00:11:14.920
+these different memory systems, you know,
+the RAM, the ROM, the Cache, and so on.
+
+173
+00:11:14.920 --> 00:11:16.160
+They all look alike.
+
+174
+00:11:16.160 --> 00:11:21.640
+They all, behave like a sequence of
+registers which are addressable.
+
+175
+00:11:21.640 --> 00:11:24.060
+And, we can access any one
+of these registers and
+
+176
+00:11:24.060 --> 00:11:28.475
+do something, with the bit contents of,
+of these registers.
+
+177
+00:11:28.475 --> 00:11:31.557
+So, everything that we
+said during this week is
+
+178
+00:11:31.557 --> 00:11:36.342
+completely applicable to every kind of
+memory that we discussed in this unit.

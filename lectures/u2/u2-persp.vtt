@@ -1,0 +1,735 @@
+WEBVTT
+
+1
+00:00:03.348 --> 00:00:09.440
+Welcome to the perspective unit of
+the second week in Nand to Tetris.
+
+2
+00:00:09.440 --> 00:00:12.620
+During this week we built an ALU.
+
+3
+00:00:12.620 --> 00:00:16.440
+And in the next week we're going
+to put this ALU on the side and
+
+4
+00:00:16.440 --> 00:00:21.190
+focus on building some memory
+systems leading up to a RAM unit.
+
+5
+00:00:21.190 --> 00:00:24.500
+But this,
+this is something that we'll do next week.
+
+6
+00:00:24.500 --> 00:00:29.340
+Let us now look back and bring up
+some questions that typically come up
+
+7
+00:00:29.340 --> 00:00:32.600
+when we talk about combinational logic and
+ALU design.
+
+8
+00:00:34.410 --> 00:00:35.510
+The first question is,
+
+9
+00:00:35.510 --> 00:00:41.270
+we've already built about 20 chips in
+this course, are these chips standard?
+
+10
+00:00:41.270 --> 00:00:45.470
+Namely, are they typically being used
+in many other computer systems, or
+
+11
+00:00:45.470 --> 00:00:50.690
+are they specialized to the computer that
+you built in this particular course.
+
+12
+00:00:50.690 --> 00:00:51.230
+Noah?
+
+13
+00:00:51.230 --> 00:00:54.360
+>> Most of the gates that we build in
+the course are completely standard.
+
+14
+00:00:54.360 --> 00:00:56.740
+The half adder, the full adder, the adder.
+
+15
+00:00:56.740 --> 00:00:59.940
+These gates are completely standard,
+as are the gates we built last week,
+
+16
+00:00:59.940 --> 00:01:03.200
+like the multiplexor the or
+Xor gates and so on.
+
+17
+00:01:03.200 --> 00:01:08.650
+What is not completely standard is
+our ALU, which is extremely simple.
+
+18
+00:01:08.650 --> 00:01:12.790
+In this course we clearly emphasize
+simplicity over almost anything else,
+
+19
+00:01:12.790 --> 00:01:15.580
+because we want to fit
+everything into one course.
+
+20
+00:01:15.580 --> 00:01:20.181
+So for that reason our ALU is extremely
+simplified in its implementation, and
+
+21
+00:01:20.181 --> 00:01:23.190
+in the respect it's a bit
+unique among usual ALUs.
+
+22
+00:01:24.470 --> 00:01:28.090
+>> The next question is directly
+related to the previous one and
+
+23
+00:01:28.090 --> 00:01:31.630
+the question is how come
+the allele that we built
+
+24
+00:01:31.630 --> 00:01:35.570
+does not feature more operations
+like multiplication and division.
+
+25
+00:01:36.600 --> 00:01:41.710
+Well the answer is that indeed
+there is no problem to write HDL
+
+26
+00:01:41.710 --> 00:01:46.860
+code that specifies chips that
+carry out multiplication and
+
+27
+00:01:46.860 --> 00:01:51.860
+division by operating directly
+on zeroes and ones, on, on bits.
+
+28
+00:01:51.860 --> 00:01:56.070
+And in fact, there are some very elegant
+and very nice algorithms to do just that.
+
+29
+00:01:57.320 --> 00:02:02.550
+But in general, when you build
+a computer system the overall
+
+30
+00:02:02.550 --> 00:02:08.270
+functionality that the system provides
+is divided between the hardware and
+
+31
+00:02:08.270 --> 00:02:10.970
+the operating system
+that runs on top of it.
+
+32
+00:02:10.970 --> 00:02:16.100
+So, it is the designers freedom
+to decide how much functionality
+
+33
+00:02:16.100 --> 00:02:19.160
+to put in each one of these layers.
+
+34
+00:02:19.160 --> 00:02:23.420
+When we design the heck computer
+which is the computer that will
+
+35
+00:02:23.420 --> 00:02:25.850
+continue to build in the course.
+
+36
+00:02:25.850 --> 00:02:31.040
+We decided, as Noam explained before,
+that the ALU will be extremely simple.
+
+37
+00:02:31.040 --> 00:02:35.520
+And that operations like division and
+multiplication will be
+
+38
+00:02:35.520 --> 00:02:40.580
+delegated to the software that
+runs on top of this computer.
+
+39
+00:02:40.580 --> 00:02:45.850
+And indeed, in the second part of this
+course, in Nand to Tetris part two,
+
+40
+00:02:45.850 --> 00:02:50.240
+we are going to design among other
+things an operating system, and
+
+41
+00:02:50.240 --> 00:02:53.420
+the operating system will
+have several libraries and
+
+42
+00:02:53.420 --> 00:02:56.950
+one of these libraries is gone,
+is going to be called math.
+
+43
+00:02:56.950 --> 00:03:01.740
+And the math library will feature
+all sorts of of very useful
+
+44
+00:03:01.740 --> 00:03:06.730
+mathematical operations including
+multiplication and division.
+
+45
+00:03:06.730 --> 00:03:09.650
+So at the end of the day
+the programmer who
+
+46
+00:03:09.650 --> 00:03:14.330
+writes programs that have to run on this
+computer will not feel the difference.
+
+47
+00:03:14.330 --> 00:03:18.970
+The programmer will not really
+care if certain algebraic
+
+48
+00:03:18.970 --> 00:03:22.600
+operation is being done by the operating
+system or by the hardware.
+
+49
+00:03:22.600 --> 00:03:27.220
+It will be completely transparent for
+the high level programmer.
+
+50
+00:03:27.220 --> 00:03:30.120
+But of course there's
+there's some tradeoff here.
+
+51
+00:03:30.120 --> 00:03:33.680
+And typically when you design
+an operation in hardware
+
+52
+00:03:34.850 --> 00:03:38.580
+typically it runs much faster but
+it's costly to design and
+
+53
+00:03:38.580 --> 00:03:44.350
+it also costs money to manufacture
+the the more complex hardware unit.
+
+54
+00:03:44.350 --> 00:03:49.090
+So once again it's a matter of tradeoff,
+cost effectiveness.
+
+55
+00:03:49.090 --> 00:03:53.170
+And that's how we decided to
+build the the heck computer.
+
+56
+00:03:53.170 --> 00:03:58.800
+Simple ALU and many extensions later
+when we build the operating system.
+
+57
+00:03:58.800 --> 00:04:01.180
+We hope that we convinced
+you that the ALU that we
+
+58
+00:04:02.190 --> 00:04:04.730
+designed in this course is indeed simple.
+
+59
+00:04:04.730 --> 00:04:10.830
+And now the next question is is
+this ALU actually efficient?
+
+60
+00:04:10.830 --> 00:04:14.130
+>> Almost everything that we did in the
+construction is completely efficient, so
+
+61
+00:04:14.130 --> 00:04:16.226
+you really can't say much more.
+
+62
+00:04:16.226 --> 00:04:21.150
+But there is one component which is where
+some important optimization is still
+
+63
+00:04:21.150 --> 00:04:25.170
+possible, and it's probably worthwhile to
+talk for one second about the kinds of
+
+64
+00:04:25.170 --> 00:04:28.120
+optimizations that we're talking about,
+and this is the adder.
+
+65
+00:04:28.120 --> 00:04:30.990
+So let us see what is the main
+problem with the adder and
+
+66
+00:04:30.990 --> 00:04:33.379
+how one may,
+may decide to improve upon it.
+
+67
+00:04:34.690 --> 00:04:37.030
+So let us recall
+the implementation of the adder.
+
+68
+00:04:43.180 --> 00:04:46.445
+The adder was constructed with
+a sequence of full adders inside it.
+
+69
+00:04:46.445 --> 00:04:53.510
+[NOISE] Each full adder got some inputs
+from the input of the adder gate,
+
+70
+00:04:53.510 --> 00:04:58.900
+and then the important thing
+that one of its output's
+
+71
+00:04:58.900 --> 00:05:04.315
+carry went on to the next adder,
+the next full adder.
+
+72
+00:05:04.315 --> 00:05:08.306
+Similarly, the outputs are carried from
+this full adder went down to this full
+
+73
+00:05:08.306 --> 00:05:09.160
+adder and so on.
+
+74
+00:05:12.300 --> 00:05:13.040
+Okay.
+
+75
+00:05:13.040 --> 00:05:17.920
+So this chain of connections is really the
+problematic one that one may wish to op,
+
+76
+00:05:17.920 --> 00:05:19.840
+wish to optimize.
+
+77
+00:05:19.840 --> 00:05:21.780
+So let us look at the distance,
+if you wish.
+
+78
+00:05:21.780 --> 00:05:23.900
+How many gates must the signal,
+
+79
+00:05:23.900 --> 00:05:29.780
+signal traverse between the input and
+the final output of the last full adder?
+
+80
+00:05:29.780 --> 00:05:31.840
+It needs to go inside
+the first full adder,
+
+81
+00:05:31.840 --> 00:05:35.540
+go through a few gates,
+then go here through another few gates.
+
+82
+00:05:35.540 --> 00:05:38.480
+Again, another through,
+few gates and so on.
+
+83
+00:05:38.480 --> 00:05:41.790
+So assume that there are, like,
+three or four gates in each full adder.
+
+84
+00:05:41.790 --> 00:05:47.830
+If this is, say,
+a 32-bit full add, 32-bit adder,
+
+85
+00:05:47.830 --> 00:05:54.610
+altogether we have 32 bits times 3 or
+4 bits of delay from input to output.
+
+86
+00:05:54.610 --> 00:05:58.610
+And when you actually run
+the such hardware in a system you
+
+87
+00:05:58.610 --> 00:06:02.280
+will have to take this delay into account
+because it actually takes time for
+
+88
+00:06:02.280 --> 00:06:05.790
+the single to perverse for all
+the capacitor to the capacitors and then
+
+89
+00:06:05.790 --> 00:06:10.840
+implementation of all these full adders
+to actually completely a load and so on.
+
+90
+00:06:10.840 --> 00:06:13.580
+So having such a long chain
+is not considered a good
+
+91
+00:06:13.580 --> 00:06:16.340
+thing because it actually
+increases the delay.
+
+92
+00:06:16.340 --> 00:06:18.370
+So what could you do instead?
+
+93
+00:06:18.370 --> 00:06:22.677
+Really, if you want to shorten the chain
+then maybe you can compute this
+
+94
+00:06:23.985 --> 00:06:29.120
+thing, the carry that goes into one of the
+full adders at the top, it's, it's a most
+
+95
+00:06:29.120 --> 00:06:33.790
+significant bits, computed in a different
+way, not throughout this long chain.
+
+96
+00:06:33.790 --> 00:06:37.160
+And in fact if you actually look
+at the logic that's computed here
+
+97
+00:06:37.160 --> 00:06:41.520
+there are more efficient ways,
+ways that have less delay.
+
+98
+00:06:41.520 --> 00:06:45.550
+And what you could do is do
+what's called carry look ahead.
+
+99
+00:06:45.550 --> 00:06:50.030
+Compute this carry independently
+of this long chain so that
+
+100
+00:06:50.030 --> 00:06:55.550
+may duplicate if you wish some effort,
+but at least you're minimizing delay.
+
+101
+00:06:55.550 --> 00:07:00.160
+So instead of just having the carry
+be computed by this long chain,
+
+102
+00:07:00.160 --> 00:07:03.960
+have the carry be computed separately for
+each one of the full adders and
+
+103
+00:07:03.960 --> 00:07:07.670
+the least delayed way possible.
+
+104
+00:07:07.670 --> 00:07:11.740
+And that is called carry look ahead and
+that would allow you to run this
+
+105
+00:07:11.740 --> 00:07:15.750
+chip at a much faster rate
+because the delays are shorter.
+
+106
+00:07:15.750 --> 00:07:16.800
+>> All right, moving along.
+
+107
+00:07:16.800 --> 00:07:23.510
+The last question that we want to focus is
+why do you recommend using built-in chips
+
+108
+00:07:23.510 --> 00:07:28.870
+in project two instead of the chips
+that we actually built in project one?
+
+109
+00:07:30.150 --> 00:07:34.290
+Well first of all you're welcome
+to use the chips that you built.
+
+110
+00:07:34.290 --> 00:07:37.760
+You know,
+we definitely don't prevented and
+
+111
+00:07:37.760 --> 00:07:41.990
+its it makes a lot of sense to use
+the chips that that you actually
+
+112
+00:07:41.990 --> 00:07:45.050
+build because this is what
+this course is all about.
+
+113
+00:07:45.050 --> 00:07:49.450
+We are building a complex machine which
+consists of various layers of construction
+
+114
+00:07:50.970 --> 00:07:55.470
+and it is perfectly reasonable that
+when you build a certain layer
+
+115
+00:07:55.470 --> 00:07:57.930
+you will use layers that you built before.
+
+116
+00:07:58.972 --> 00:08:04.480
+However there are very good
+reasons why you should want to
+
+117
+00:08:04.480 --> 00:08:09.040
+use built in chips that we supply rather
+than the chips that you've built yourself.
+
+118
+00:08:10.150 --> 00:08:14.410
+And the most important of these reasons
+
+119
+00:08:14.410 --> 00:08:19.030
+is the notion of we can
+call it local failures.
+
+120
+00:08:19.030 --> 00:08:22.520
+And the idea is that if you build,
+I'm sorry,
+
+121
+00:08:22.520 --> 00:08:27.110
+if you use built-in chips as
+your chip arts, and some and
+
+122
+00:08:27.110 --> 00:08:32.300
+some problem raises its ugly
+head in the present project,
+
+123
+00:08:32.300 --> 00:08:37.700
+then you are guaranteed that this
+problem can be attribute to bugs and
+
+124
+00:08:37.700 --> 00:08:43.820
+problems that were created in this project
+only, and not in previous projects.
+
+125
+00:08:43.820 --> 00:08:48.540
+So, this is also sometimes called
+the notion of unit testing.
+
+126
+00:08:48.540 --> 00:08:53.030
+You test each unit separately
+from the rest of the system.
+
+127
+00:08:53.030 --> 00:08:56.890
+And this principle of unit testing
+goes hand in hand with other
+
+128
+00:08:56.890 --> 00:09:00.980
+very important principles like
+obstruction and modularity.
+
+129
+00:09:00.980 --> 00:09:06.070
+And taken together, you know, one of these
+things that these principles imply is that
+
+130
+00:09:06.070 --> 00:09:10.700
+once you've finished building
+a certain module you can put it away.
+
+131
+00:09:10.700 --> 00:09:16.100
+You can stop worrying about its
+implementation and use only
+
+132
+00:09:16.100 --> 00:09:22.190
+the interface or the API of this module
+when you build more complex functionality.
+
+133
+00:09:22.190 --> 00:09:26.920
+This really is the only way
+to manage complex projects.
+
+134
+00:09:26.920 --> 00:09:33.560
+And by adhering to these principles which
+we find extremely important by doing so,
+
+135
+00:09:33.560 --> 00:09:37.730
+we can really take this super-ambitious
+project of building a modern
+
+136
+00:09:38.780 --> 00:09:43.530
+computer from first principles and
+do it only in seven weeks.
+
+137
+00:09:43.530 --> 00:09:44.940
+>> Shimon?
+
+138
+00:09:44.940 --> 00:09:47.600
+>> Yes.
+>> I think we should also confess
+
+139
+00:09:47.600 --> 00:09:49.880
+that our simulator is not that efficient,
+
+140
+00:09:49.880 --> 00:09:52.840
+especially when we get to
+more complex projects,
+
+141
+00:09:52.840 --> 00:09:57.840
+if you actually layer the chips that
+were constructed in previous projects,
+
+142
+00:09:57.840 --> 00:10:03.110
+our simulator will have to face a huge
+number or arrays and will simply be slow.
+
+143
+00:10:03.110 --> 00:10:07.250
+If you do it using just the, the finished
+end of the previous chips, just the,
+
+144
+00:10:07.250 --> 00:10:11.190
+the specifications of the previous chips,
+then our simulator will be fast and
+
+145
+00:10:11.190 --> 00:10:12.790
+nice to work with.
+
+146
+00:10:12.790 --> 00:10:14.030
+>> Yes.
+In fact that's
+
+147
+00:10:14.030 --> 00:10:18.540
+another very important technical reason
+why we want to use built-in chips and
+
+148
+00:10:18.540 --> 00:10:22.040
+this problem will come up later in the
+course when we build memory systems and
+
+149
+00:10:22.040 --> 00:10:23.950
+more complex functionality.
+
+150
+00:10:23.950 --> 00:10:27.682
+And indeed this is a very
+good other reason why
+
+151
+00:10:27.682 --> 00:10:31.580
+it makes a lot of sense to use
+software based built-in chips.

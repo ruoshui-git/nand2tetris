@@ -1,0 +1,1220 @@
+WEBVTT
+
+1
+00:00:03.522 --> 00:00:06.699
+In a previous unit, we discussed
+how we're dealing with time and
+
+2
+00:00:06.699 --> 00:00:09.580
+sequential logic in computing systems.
+
+3
+00:00:09.580 --> 00:00:13.280
+What we'll do in this unit is actually
+talk about the actual elements,
+
+4
+00:00:13.280 --> 00:00:16.250
+the chips that will allow us to do,
+provide this kind of functionality.
+
+5
+00:00:17.650 --> 00:00:21.490
+So, let us say,
+let us recall how we started the last unit
+
+6
+00:00:21.490 --> 00:00:25.280
+where we started the way we deal with
+time, we add integer time units.
+
+7
+00:00:25.280 --> 00:00:30.080
+At every time unit t, we want something
+that can depend with value to compute some
+
+8
+00:00:30.080 --> 00:00:32.860
+kind of function and the output.
+
+9
+00:00:32.860 --> 00:00:37.940
+Some kind of function and the value at the
+previous time unit, the time t minus 1.
+
+10
+00:00:37.940 --> 00:00:41.890
+So what kind of element do we need in
+order to provide such a functionality?
+
+11
+00:00:41.890 --> 00:00:45.950
+Well, the missing element,
+we need something as a very basic point,
+
+12
+00:00:45.950 --> 00:00:49.280
+is we need something to actually
+remember one bit of information,
+
+13
+00:00:49.280 --> 00:00:53.160
+move one bit of information
+from time t minus 1 to time t.
+
+14
+00:00:53.160 --> 00:00:54.350
+This is what we have missing.
+
+15
+00:00:54.350 --> 00:00:57.030
+We have lots of combinatorial log,
+logic so
+
+16
+00:00:57.030 --> 00:01:02.050
+far that can do any kind of manipulations
+that we want within a single time unit.
+
+17
+00:01:02.050 --> 00:01:05.960
+But actually moving information
+from time t minus 1 to time t is
+
+18
+00:01:05.960 --> 00:01:08.020
+something that is still missing.
+
+19
+00:01:08.020 --> 00:01:10.941
+Now, if we look about that kind
+of thing in the way we're,
+
+20
+00:01:10.941 --> 00:01:16.930
+we're in this abstract way that we're
+thinking about these discrete time units,
+
+21
+00:01:16.930 --> 00:01:22.250
+at that exact time when we switch between
+time unit t minus 1 to time unit t.
+
+22
+00:01:22.250 --> 00:01:24.360
+This new element must remember the bit.
+
+23
+00:01:25.380 --> 00:01:28.450
+At that point it has to remember
+what happened previously and
+
+24
+00:01:28.450 --> 00:01:30.490
+carry it on to the next stage.
+
+25
+00:01:30.490 --> 00:01:33.770
+Without that we cannot have
+this kind of functionality.
+
+26
+00:01:35.420 --> 00:01:40.570
+Now, this means that at this transition
+point between two consecutive time units
+
+27
+00:01:40.570 --> 00:01:42.180
+it must have state.
+
+28
+00:01:42.180 --> 00:01:46.460
+It must remember whether it's now
+remembering 0 or it's now remembering 1.
+
+29
+00:01:46.460 --> 00:01:51.945
+That means it has to be in two different
+physical states in, in its implementation.
+
+30
+00:01:53.630 --> 00:01:56.690
+These two physical states,
+it must be able to move
+
+31
+00:01:56.690 --> 00:02:00.000
+between them according to the logic
+of the previous time unit.
+
+32
+00:02:00.000 --> 00:02:03.465
+Which means, which means it needs to
+be able to flip between these two
+
+33
+00:02:03.465 --> 00:02:06.477
+kind of different, two,
+two different physical states.
+
+34
+00:02:06.477 --> 00:02:11.271
+An element that can do that thing,
+that can flip change situation between
+
+35
+00:02:11.271 --> 00:02:15.180
+two different kind of such
+states are called Flip-Flops.
+
+36
+00:02:15.180 --> 00:02:18.170
+They flip to 0 and
+then can flop back to 1, and
+
+37
+00:02:18.170 --> 00:02:22.060
+the point is that this flipping and
+flopping is something they remember.
+
+38
+00:02:22.060 --> 00:02:24.910
+It's not just a function
+of the current input, but
+
+39
+00:02:24.910 --> 00:02:29.340
+its something internal to them
+they remember between time units.
+
+40
+00:02:29.340 --> 00:02:33.310
+So let us view now the basic
+flip flops that we will you,
+
+41
+00:02:33.310 --> 00:02:37.460
+be using in this course which is
+called the Clocked Data Flip Flop.
+
+42
+00:02:37.460 --> 00:02:41.500
+This flip flop has a single input and
+a single output and it basically
+
+43
+00:02:41.500 --> 00:02:45.780
+remembers the input from last time unit
+and outputs it in the next time unit.
+
+44
+00:02:46.820 --> 00:02:50.190
+So, if we again look at
+the diagram of our time units and
+
+45
+00:02:50.190 --> 00:02:52.510
+assume that our input looks like this.
+
+46
+00:02:52.510 --> 00:02:56.831
+If it starts with a value of 1,
+its time unit 1 goes down to 0 for
+
+47
+00:02:56.831 --> 00:03:01.090
+time units 2 and 3, and
+then goes up to 1 and down to 0 again.
+
+48
+00:03:02.140 --> 00:03:06.780
+Then when we look at what the D flip
+flop will do, at any time unit it
+
+49
+00:03:06.780 --> 00:03:11.980
+will actually return the value that was
+in the input in the previous time unit.
+
+50
+00:03:11.980 --> 00:03:16.190
+So at time 1, we don't exactly know what
+our output will be because we haven't
+
+51
+00:03:16.190 --> 00:03:18.850
+specified what happened in
+the previous time unit.
+
+52
+00:03:18.850 --> 00:03:22.280
+So for us, it's gray,
+we just don't know what the output is.
+
+53
+00:03:22.280 --> 00:03:27.040
+But once we get to time unit 2, then we
+know exactly what the output needs to be.
+
+54
+00:03:27.040 --> 00:03:30.510
+It needs to be exactly what
+the input was at time 1.
+
+55
+00:03:30.510 --> 00:03:35.473
+Similarly at time unit 3, we know it
+has to be 0 because that was what
+
+56
+00:03:35.473 --> 00:03:38.680
+was the input was at time 2, and so on.
+
+57
+00:03:38.680 --> 00:03:43.175
+At every time point we are having simply
+the previous signal that was fed to
+
+58
+00:03:43.175 --> 00:03:46.090
+the input,
+shifted one time unit to the right.
+
+59
+00:03:46.090 --> 00:03:48.030
+And this is what
+the Clocked Data Flip Flop does.
+
+60
+00:03:49.200 --> 00:03:52.140
+And this is going to be the only
+element that will provide
+
+61
+00:03:52.140 --> 00:03:54.760
+all the sequential logic
+that we need in this course.
+
+62
+00:03:54.760 --> 00:03:58.890
+And from this we'll need all the kinds of
+the sequential circuitry that we need,
+
+63
+00:03:58.890 --> 00:04:01.250
+memories, counters, and so on.
+
+64
+00:04:01.250 --> 00:04:04.740
+One thing that I'd like to mention at
+this point is the meaning of the little
+
+65
+00:04:04.740 --> 00:04:09.280
+triangles that we see at the bottom,
+at the bottom of the D flip flop diagram.
+
+66
+00:04:09.280 --> 00:04:11.880
+The meaning of this is that
+we have a sequential chip,
+
+67
+00:04:11.880 --> 00:04:13.800
+a chip that depends on time.
+
+68
+00:04:13.800 --> 00:04:17.490
+As opposed to all previous chips are all
+combinatorial chips that we had so
+
+69
+00:04:17.490 --> 00:04:22.300
+far, whose output only depended on their
+own inputs at any given point in time.
+
+70
+00:04:22.300 --> 00:04:26.280
+Here we have a chip whose output also
+depends on what happened previously and
+
+71
+00:04:26.280 --> 00:04:29.360
+state that's kept inside this chip.
+
+72
+00:04:29.360 --> 00:04:34.100
+This is the only point that we care for
+this logical dependency of time.
+
+73
+00:04:34.100 --> 00:04:37.954
+Although it's probably also interesting
+to note that in any physical
+
+74
+00:04:37.954 --> 00:04:39.793
+implementation of a D flip flop.
+
+75
+00:04:39.793 --> 00:04:43.073
+This means that the implementation
+will also need some kind of
+
+76
+00:04:43.073 --> 00:04:46.038
+access to this clock that we
+mentioned in the last unit,
+
+77
+00:04:46.038 --> 00:04:50.480
+that actually breaks down the physical
+continuous time into discrete time units.
+
+78
+00:04:51.560 --> 00:04:55.325
+Again we won't care about this because
+we're living in our abstraction of
+
+79
+00:04:55.325 --> 00:04:56.590
+discrete time, but
+
+80
+00:04:56.590 --> 00:05:01.190
+from our point of view this is just a way
+to remember that this chip has state.
+
+81
+00:05:01.190 --> 00:05:03.550
+And can remember and ha, and, and,
+
+82
+00:05:03.550 --> 00:05:07.845
+depends out and its output also depends
+on what happens in previous time units.
+
+83
+00:05:09.130 --> 00:05:10.940
+Now at this point, let us say,
+
+84
+00:05:10.940 --> 00:05:14.490
+just say one word about
+the implementation of the D Flip Flop.
+
+85
+00:05:14.490 --> 00:05:18.034
+In this course, we are going to deal with
+it as a completely primitive operation.
+
+86
+00:05:18.034 --> 00:05:22.730
+This is something given to you that cannot
+be manufactured from anything else.
+
+87
+00:05:22.730 --> 00:05:26.030
+But just, you are going to use it,
+just like you viewed the Nand gate and
+
+88
+00:05:26.030 --> 00:05:27.260
+from D Flip Flop, and
+
+89
+00:05:27.260 --> 00:05:31.980
+the Nand gate you will provide, you will
+actually build everything in the course.
+
+90
+00:05:31.980 --> 00:05:33.060
+In many other courses,
+
+91
+00:05:33.060 --> 00:05:37.910
+you actually eh, follow what
+happens in most real life hardware.
+
+92
+00:05:37.910 --> 00:05:43.330
+You can actually construct the flip flop
+from Nand gates eh, when you actually
+
+93
+00:05:43.330 --> 00:05:47.730
+take the Nand gate and put them into some
+kind of a loop eh, between each other.
+
+94
+00:05:47.730 --> 00:05:52.000
+This kind of loop basically has them
+amplifying the same signal again and
+
+95
+00:05:52.000 --> 00:05:55.210
+it allows them to get stuck
+either in a zero or one state.
+
+96
+00:05:55.210 --> 00:05:58.660
+And with some additional logic you
+will also be able to manipulate this
+
+97
+00:05:58.660 --> 00:05:59.540
+date from the outside.
+
+98
+00:06:01.450 --> 00:06:03.690
+Eh, this kind of logic
+usually has two steps.
+
+99
+00:06:03.690 --> 00:06:08.024
+The first step is one, is what I've just
+described having this kind of cycle that
+
+100
+00:06:08.024 --> 00:06:10.460
+allows it to somehow remember information.
+
+101
+00:06:10.460 --> 00:06:15.290
+And the second type step is to actually
+have some kind of logic that actually
+
+102
+00:06:15.290 --> 00:06:19.230
+provide isolation between
+subsequent time units.
+
+103
+00:06:19.230 --> 00:06:23.330
+We will not describe in this course how
+this is done even though it's extremely
+
+104
+00:06:23.330 --> 00:06:27.300
+elegant and beautiful because we
+basically think it's confusing.
+
+105
+00:06:27.300 --> 00:06:30.750
+We do not think that is the right way
+to think about a logical circuitry.
+
+106
+00:06:30.750 --> 00:06:35.510
+We think that it's cont, completely
+worthwhile to keep separate in your head.
+
+107
+00:06:35.510 --> 00:06:38.690
+The combinatorial logic which
+happens instantaneously and
+
+108
+00:06:38.690 --> 00:06:42.750
+the sequential logic which we don't
+want to, to thinking about how it,
+
+109
+00:06:42.750 --> 00:06:46.560
+how it is constructed from lower
+levels combinatorial stuff.
+
+110
+00:06:46.560 --> 00:06:49.620
+But rather think about it
+as its own primitive block.
+
+111
+00:06:49.620 --> 00:06:54.160
+So now that we can remember one bit
+from this, we can build everything else.
+
+112
+00:06:54.160 --> 00:06:57.190
+In fact, there is a generic paradigm
+of how we're going to build
+
+113
+00:06:57.190 --> 00:07:01.320
+all our logic in the computer, and
+it's going to be a combination of
+
+114
+00:07:01.320 --> 00:07:04.910
+remembering information via
+this basic D flip flops.
+
+115
+00:07:04.910 --> 00:07:08.557
+And then manipulating them using
+combinatorial logics that we built in
+
+116
+00:07:08.557 --> 00:07:09.842
+the first two lectures.
+
+117
+00:07:09.842 --> 00:07:14.100
+So in particular the usual way we do
+things is we have an array of D flip flops
+
+118
+00:07:14.100 --> 00:07:17.620
+which basically compromise all
+of our memory in the system.
+
+119
+00:07:18.900 --> 00:07:22.890
+Their output is going to be fed
+into some combinatorial logic
+
+120
+00:07:22.890 --> 00:07:26.310
+together with the new input
+that you get in this time unit.
+
+121
+00:07:26.310 --> 00:07:30.110
+And all of this is going to change the
+state that we have in the D flip flop for
+
+122
+00:07:30.110 --> 00:07:31.800
+the next time unit.
+
+123
+00:07:31.800 --> 00:07:35.480
+This is the general way we're going to
+build everything whether it's a memory or
+
+124
+00:07:35.480 --> 00:07:36.300
+a counter.
+
+125
+00:07:36.300 --> 00:07:40.260
+For example, if it's a counter we're going
+to remember a number in all these flip
+
+126
+00:07:40.260 --> 00:07:44.900
+flops and the combinatorial logic will
+basically add one to the counter.
+
+127
+00:07:44.900 --> 00:07:46.610
+In this way, every time unit,
+
+128
+00:07:46.610 --> 00:07:49.600
+the new value that we have will
+be 1 more than the old unit.
+
+129
+00:07:50.610 --> 00:07:54.420
+Let us say, actually now look at the first
+bit that we're actually going to the first
+
+130
+00:07:54.420 --> 00:07:59.230
+device, the first chip that we're going
+to actually be, build from a D flip flop.
+
+131
+00:07:59.230 --> 00:08:02.838
+And this is a device that actually builds,
+remembers a bit forever.
+
+132
+00:08:02.838 --> 00:08:07.950
+So the D flip flop provided the basic
+functionality of remembering a bit for
+
+133
+00:08:07.950 --> 00:08:09.380
+one time unit.
+
+134
+00:08:09.380 --> 00:08:13.820
+If we want to build a memory we want
+something that can remember a bit forever.
+
+135
+00:08:13.820 --> 00:08:17.130
+We store it,
+we tell now start remembering this bit and
+
+136
+00:08:17.130 --> 00:08:19.380
+then it keeps on remembering the bit.
+
+137
+00:08:19.380 --> 00:08:23.610
+Such a device, such as chip eh,
+is defined by the following API,
+
+138
+00:08:23.610 --> 00:08:26.980
+by the following chip that we
+have that we call the bit chip.
+
+139
+00:08:26.980 --> 00:08:30.300
+It has two inputs,
+an input bit and a load bit.
+
+140
+00:08:31.360 --> 00:08:33.790
+Once we take the load bit and
+
+141
+00:08:33.790 --> 00:08:37.920
+put the 1 into it we want to
+remember the input bit at that time.
+
+142
+00:08:37.920 --> 00:08:42.090
+When the load bit goes down to
+zero we want to the, the chip to
+
+143
+00:08:42.090 --> 00:08:46.930
+keep remembering the last time that the,
+the last input that was loaded into it for
+
+144
+00:08:46.930 --> 00:08:50.790
+infinity until a new load
+operation is performed.
+
+145
+00:08:50.790 --> 00:08:53.030
+So this is basically
+the logic that we have.
+
+146
+00:08:53.030 --> 00:08:58.869
+If load at time t minus 1 is 1,
+then we want to the, the next out,
+
+147
+00:08:58.869 --> 00:09:04.010
+the out at time t to be exactly
+the input at time t minus 1.
+
+148
+00:09:04.010 --> 00:09:08.373
+Otherwise, we want to output the time t
+to just keep on being what it is now.
+
+149
+00:09:08.373 --> 00:09:13.461
+Basically the old value that we
+remember the same as out t minus 1.
+
+150
+00:09:13.461 --> 00:09:17.790
+How can we build such a chip
+from our humble D flip flop?
+
+151
+00:09:17.790 --> 00:09:23.040
+Before we look at that,
+let us see what this bit chip needs to do.
+
+152
+00:09:23.040 --> 00:09:27.090
+So again, let's look at two possible
+signals for load and for in.
+
+153
+00:09:27.090 --> 00:09:33.300
+So for example, we ask for loading in time
+units 1 and time unit 4, while input is,
+
+154
+00:09:33.300 --> 00:09:38.100
+let's say it's 1 in the first time
+unit and then it goes down, down to 0.
+
+155
+00:09:38.100 --> 00:09:42.010
+So let's see what do we expect
+the output of this bit gate to be.
+
+156
+00:09:42.010 --> 00:09:44.650
+Well on the first time unit
+we don't know the history so
+
+157
+00:09:44.650 --> 00:09:48.490
+we have no idea what the output is,
+let's put it in gray.
+
+158
+00:09:48.490 --> 00:09:52.790
+Now in time unit 2,
+it's supposed to be, since we asked for
+
+159
+00:09:52.790 --> 00:09:57.130
+a load at time unit 1, we,
+what we want in time unit 2 is for
+
+160
+00:09:57.130 --> 00:10:01.200
+the output is to be exactly
+like the input at time unit 1.
+
+161
+00:10:01.200 --> 00:10:05.951
+Because we have a load at time 1,
+the value of any time 1 is 1,
+
+162
+00:10:05.951 --> 00:10:08.568
+the output at time 2 should be 1.
+
+163
+00:10:08.568 --> 00:10:13.517
+Now after that, load goes down to 0 for
+the next 2 time units.
+
+164
+00:10:13.517 --> 00:10:19.836
+So basically what we want is we want the
+same output to, the same output to remain,
+
+165
+00:10:19.836 --> 00:10:24.870
+just because load is going
+to 0 even if input changes.
+
+166
+00:10:24.870 --> 00:10:30.170
+So we're going to keep on maintaining
+the same value for the next 2 time units
+
+167
+00:10:30.170 --> 00:10:33.330
+until load goes up to 1 and then we'll
+have to see what we're going to do.
+
+168
+00:10:34.658 --> 00:10:38.220
+Now notice at for this time units,
+whatever input was,
+
+169
+00:10:38.220 --> 00:10:41.550
+whether input went up or
+down, it does not matter.
+
+170
+00:10:41.550 --> 00:10:44.630
+In any case,
+we will not change the output of our chip.
+
+171
+00:10:45.830 --> 00:10:48.050
+Now let's see what happened
+at the fourth time unit.
+
+172
+00:10:48.050 --> 00:10:51.690
+At thefourth time unit, load goes up to 1.
+
+173
+00:10:51.690 --> 00:10:55.460
+Load goes up to 1, so now we're asking
+the chip to load the value again,
+
+174
+00:10:55.460 --> 00:10:58.720
+and the value that we load is
+the value of in right now,
+
+175
+00:10:58.720 --> 00:11:01.300
+which is the value at
+time four which is zero.
+
+176
+00:11:01.300 --> 00:11:06.090
+Notice that, that we have to load at time
+four, but this will only affect the output
+
+177
+00:11:06.090 --> 00:11:09.740
+at time five, because the output
+at time five is basically
+
+178
+00:11:09.740 --> 00:11:14.810
+the change to the input at time four, only
+if load at time four asked it to do it.
+
+179
+00:11:14.810 --> 00:11:19.600
+So that means that at time 5,
+our output will go down to 0 as planned.
+
+180
+00:11:19.600 --> 00:11:23.030
+So this is the intended
+functionality of the 1-Bit Register.
+
+181
+00:11:23.030 --> 00:11:24.200
+How can we do that?
+
+182
+00:11:24.200 --> 00:11:27.900
+How can we pipe and
+pipe the value that we remember so
+
+183
+00:11:27.900 --> 00:11:31.410
+it will keep on being remembered
+until we ask, we ask to change it?
+
+184
+00:11:33.020 --> 00:11:34.790
+Well here is the first naive approach.
+
+185
+00:11:34.790 --> 00:11:37.760
+We will take the output,
+what we currently remember and
+
+186
+00:11:37.760 --> 00:11:40.670
+let's plug it back into
+the input of the D flip flop.
+
+187
+00:11:40.670 --> 00:11:44.210
+And this way, the D flip flop,
+unless we tell it to load the new value,
+
+188
+00:11:44.210 --> 00:11:48.910
+we just keep on having the same value and
+looping inside it if you wish.
+
+189
+00:11:48.910 --> 00:11:52.270
+This is a very basic the ba,
+the correct idea in general but
+
+190
+00:11:52.270 --> 00:11:54.000
+of course this is not the real chip.
+
+191
+00:11:54.000 --> 00:11:54.750
+How do we connect?
+
+192
+00:11:54.750 --> 00:11:56.250
+How do we put the real input in,
+
+193
+00:11:56.250 --> 00:12:00.250
+if we want to also put the output of
+the D flip flop back into itself?
+
+194
+00:12:00.250 --> 00:12:01.870
+How does this connection done?
+
+195
+00:12:01.870 --> 00:12:06.650
+So this doesn't quite work, really the way
+to combine these two possible sources
+
+196
+00:12:06.650 --> 00:12:10.850
+into the D flip-flop, one source which is
+an output from the previous stage, and
+
+197
+00:12:10.850 --> 00:12:13.370
+another source which is a new input.
+
+198
+00:12:13.370 --> 00:12:17.370
+And which one of them we want to actually
+plug into the D flip-flop depends of
+
+199
+00:12:17.370 --> 00:12:20.380
+course on whether the load bit is set or
+not.
+
+200
+00:12:20.380 --> 00:12:24.610
+But we already know exactly how to
+combine two sources into one output and
+
+201
+00:12:24.610 --> 00:12:26.960
+this is exactly the multiplexer.
+
+202
+00:12:26.960 --> 00:12:31.210
+So, if we actually take the input and
+fit it into one input of the multiplexer.
+
+203
+00:12:31.210 --> 00:12:35.320
+Take the previous output and fit it into
+another input of the multiplexer and
+
+204
+00:12:35.320 --> 00:12:39.490
+then load, choose between them,
+this is exactly the correct functionality.
+
+205
+00:12:39.490 --> 00:12:43.040
+We can actually see how that
+works by following step by step.
+
+206
+00:12:43.040 --> 00:12:45.560
+So, let's try to follow
+this implementation and
+
+207
+00:12:45.560 --> 00:12:47.830
+see how it works eh, real time.
+
+208
+00:12:47.830 --> 00:12:50.860
+Again, let us take two
+possible example inputs,
+
+209
+00:12:50.860 --> 00:12:54.510
+load them in that we get from some
+other source that we don't care about.
+
+210
+00:12:54.510 --> 00:12:58.390
+And see what our new implementation
+does when it's fed these two signals and
+
+211
+00:12:58.390 --> 00:13:01.260
+inputs, and what it produces as output.
+
+212
+00:13:01.260 --> 00:13:05.327
+Let us start with time step 1,
+at time step 1 the ma, there is 1 point,
+
+213
+00:13:05.327 --> 00:13:07.970
+piece of information that we don't know.
+
+214
+00:13:07.970 --> 00:13:10.780
+We don't know what the previous
+state of the D flip flop was,
+
+215
+00:13:10.780 --> 00:13:14.790
+what the previous out was because
+it's not specified in this example.
+
+216
+00:13:14.790 --> 00:13:17.060
+So for
+us it's going to be a question mark.
+
+217
+00:13:17.060 --> 00:13:18.620
+All the other bits we can complete.
+
+218
+00:13:18.620 --> 00:13:21.930
+We know that in is one because
+that's what we see in our input.
+
+219
+00:13:21.930 --> 00:13:24.330
+We know that load is 1 and so on.
+
+220
+00:13:24.330 --> 00:13:28.520
+Now notice that the multiplexer here,
+because load is 1 and
+
+221
+00:13:28.520 --> 00:13:32.566
+because in is 1 even though we don't know
+what is the input to its other input.
+
+222
+00:13:32.566 --> 00:13:37.520
+To its eh, down to its lower input,
+we still can tell very well
+
+223
+00:13:37.520 --> 00:13:41.274
+what the output is, what the output of the
+multiplexer is and that's going to be 1.
+
+224
+00:13:42.390 --> 00:13:47.340
+Now eh, that we know what the input to
+the D flip flop at time unit 1 is, so
+
+225
+00:13:47.340 --> 00:13:50.680
+even though we don't know
+the output at this point time unit
+
+226
+00:13:50.680 --> 00:13:53.390
+we know everything about the input.
+
+227
+00:13:53.390 --> 00:13:54.350
+Now we can see,
+
+228
+00:13:54.350 --> 00:13:58.120
+now this implies exactly what is going
+to happen in the next time step.
+
+229
+00:13:58.120 --> 00:14:01.340
+In the next time step,
+the one that was the input
+
+230
+00:14:01.340 --> 00:14:05.170
+of the D flip flop is going to be passed
+and is going to be the output of the D
+
+231
+00:14:05.170 --> 00:14:09.470
+flip flop in the next time unit exactly
+when we switch between time units.
+
+232
+00:14:09.470 --> 00:14:12.150
+Now we can fill up the rest
+of the information about what
+
+233
+00:14:12.150 --> 00:14:13.940
+happens in the second time unit.
+
+234
+00:14:13.940 --> 00:14:16.980
+In the second time unit,
+we know what in is, that was our input.
+
+235
+00:14:16.980 --> 00:14:19.830
+We know what load is,
+we have the previous out so
+
+236
+00:14:19.830 --> 00:14:22.490
+we can calculate exactly
+what the multiplexer does.
+
+237
+00:14:22.490 --> 00:14:27.950
+And the multiplexer basically,
+basically picks the previous output
+
+238
+00:14:27.950 --> 00:14:31.339
+from the ori,
+from the old value of the DFF.
+
+239
+00:14:32.970 --> 00:14:37.100
+And then we exactly, we again, we know
+what the input to the, to the D, D,
+
+240
+00:14:37.100 --> 00:14:38.557
+D flip flop is going to be.
+
+241
+00:14:38.557 --> 00:14:43.560
+It is going to be again a 1, and
+this we can keep on doing step after step.
+
+242
+00:14:43.560 --> 00:14:46.231
+At each point in time we
+know the previous values.
+
+243
+00:14:46.231 --> 00:14:50.900
+We know what load is, we know what in is,
+we can compute what the next situation is,
+
+244
+00:14:50.900 --> 00:14:54.503
+and at every given point in time,
+we can write down the values and
+
+245
+00:14:54.503 --> 00:14:58.550
+all the different wires just like we did,
+did in combinatorial logic.
+
+246
+00:15:00.900 --> 00:15:04.595
+And as we see, this implementation
+actually provides the required
+
+247
+00:15:04.595 --> 00:15:09.785
+functionality, the functionality of
+whenever load is being pulled to high.
+
+248
+00:15:09.785 --> 00:15:14.845
+We load the input from in and keep it
+until the next time that a load is asked.
+
+249
+00:15:16.745 --> 00:15:21.020
+So at this point, we've looked,
+we've, we've looked at
+
+250
+00:15:21.020 --> 00:15:24.990
+what is the basic unit that allows us
+to do sequential logic on a computer.
+
+251
+00:15:24.990 --> 00:15:30.480
+And we've built the first interesting
+element from it, our one bit memory.
+
+252
+00:15:31.540 --> 00:15:36.437
+Once we have a one bit memory, in the next
+unit we'll actually build a whole
+
+253
+00:15:36.437 --> 00:15:39.571
+huge memory of lots and
+lots of bytes and words.

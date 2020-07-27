@@ -1,0 +1,719 @@
+WEBVTT
+
+1
+00:00:03.240 --> 00:00:05.400
+During the first week of this course,
+
+2
+00:00:05.400 --> 00:00:08.840
+we built a suite of 15
+elementary logic gates.
+
+3
+00:00:10.190 --> 00:00:14.090
+And in the next week of the course, we're
+going to take this basic functionality and
+
+4
+00:00:14.090 --> 00:00:16.870
+use it in order to build
+some more interesting and
+
+5
+00:00:16.870 --> 00:00:21.050
+powerful chips like adders and
+arithmetic logic unit.
+
+6
+00:00:22.440 --> 00:00:27.170
+Now whenever we teach this course
+every week of instruction,
+
+7
+00:00:27.170 --> 00:00:29.760
+there's a whole set of issues and
+questions that come up
+
+8
+00:00:29.760 --> 00:00:34.270
+about different aspects of building
+hardware and software systems.
+
+9
+00:00:34.270 --> 00:00:42.130
+So we've decided to devote the last unit
+of each week to answer such questions.
+
+10
+00:00:42.130 --> 00:00:48.410
+And we are calling this unit this last
+unit every week a perspective unit.
+
+11
+00:00:48.410 --> 00:00:52.690
+So here are the questions that
+typically come up at the end of
+
+12
+00:00:53.740 --> 00:00:56.660
+this unit in which we deal
+with elementary logic gates.
+
+13
+00:00:58.490 --> 00:01:03.130
+So the first question of the day is is it
+
+14
+00:01:03.130 --> 00:01:07.815
+possible to build a computer starting
+with a logic gate other than NAND?
+
+15
+00:01:09.050 --> 00:01:14.340
+Well I'll take this question and
+the answer is indeed yes, it's possible.
+
+16
+00:01:14.340 --> 00:01:19.230
+For example, you can use another
+elementary gate called NOR, which stands
+
+17
+00:01:19.230 --> 00:01:25.240
+for not or, and base your entire
+computer on this atomic building block.
+
+18
+00:01:25.240 --> 00:01:30.150
+Likewise, it is quite natural to start
+with the suite consisting of and,
+
+19
+00:01:30.150 --> 00:01:33.690
+or and not gates and
+use them to build a system.
+
+20
+00:01:33.690 --> 00:01:36.410
+And there are a number
+of other possibilities.
+
+21
+00:01:36.410 --> 00:01:41.560
+And in fact it's quite similar to
+the way geometry can be founded
+
+22
+00:01:41.560 --> 00:01:43.950
+on different sets of axioms.
+
+23
+00:01:43.950 --> 00:01:47.770
+And each one of them can be yet
+another point of departure to build,
+
+24
+00:01:47.770 --> 00:01:51.180
+you know, all the power and
+theorems of geometry.
+
+25
+00:01:51.180 --> 00:01:53.490
+This is not such a bad analogy.
+
+26
+00:01:53.490 --> 00:01:56.010
+However, it turns out that NAND gates
+
+27
+00:01:56.010 --> 00:02:00.340
+are very popular in physical
+implementations of hardware systems.
+
+28
+00:02:00.340 --> 00:02:06.010
+Because there are many integrated circuit
+technologies in which it is quite cheap or
+
+29
+00:02:06.010 --> 00:02:08.530
+relatively cheap to build NAND gates.
+
+30
+00:02:08.530 --> 00:02:11.690
+As you well know during
+the course during the first week,
+
+31
+00:02:11.690 --> 00:02:15.320
+we treated these NAND gates
+as black box abstractions.
+
+32
+00:02:15.320 --> 00:02:19.490
+So, the next question, which is directly
+related to the first one, is well,
+
+33
+00:02:19.490 --> 00:02:24.260
+if you actually had to build a,
+a NAND gate, how would you go about it?
+
+34
+00:02:25.550 --> 00:02:27.950
+Norm, maybe you can answer this question.
+
+35
+00:02:27.950 --> 00:02:32.790
+>> Okay so, in this course we sort of made
+a point of not going into this question.
+
+36
+00:02:32.790 --> 00:02:37.795
+Because we feel that is already physics or
+electronics, rather than computer science.
+
+37
+00:02:37.795 --> 00:02:39.475
+But still, let us see an example.
+
+38
+00:02:39.475 --> 00:02:43.024
+There are of course many different
+technologies to implement and navigate and
+
+39
+00:02:43.024 --> 00:02:43.889
+as in any other gate.
+
+40
+00:02:43.889 --> 00:02:47.125
+But let me show you,
+let me show you the simplest example,
+
+41
+00:02:47.125 --> 00:02:49.675
+if you wish, of such an implementation.
+
+42
+00:02:49.675 --> 00:02:55.150
+So here is an NMOS
+implementation of a NAND gate.
+
+43
+00:02:55.150 --> 00:02:59.078
+[NOISE] We have a plus voltage,
+
+44
+00:02:59.078 --> 00:03:03.961
+which is going to be one, our logical one.
+
+45
+00:03:03.961 --> 00:03:06.569
+And the minus voltage,
+which is our logical zero, and
+
+46
+00:03:06.569 --> 00:03:08.450
+we're going to connect them as follows.
+
+47
+00:03:09.760 --> 00:03:15.730
+A little resistor here which is a wi
+connection, and then two nice transistors,
+
+48
+00:03:15.730 --> 00:03:20.960
+NMOS transistors,
+which we connect this way.
+
+49
+00:03:20.960 --> 00:03:24.870
+This is going to be our a input, and
+this is going to be our b input.
+
+50
+00:03:24.870 --> 00:03:26.430
+And this is going to be our output.
+
+51
+00:03:28.450 --> 00:03:30.970
+So these are the two
+transistors that we have.
+
+52
+00:03:31.990 --> 00:03:34.880
+So how does this implementation work?
+
+53
+00:03:34.880 --> 00:03:39.450
+The basic functionality of one of these
+endmost transistors, is that whatever that
+
+54
+00:03:39.450 --> 00:03:44.950
+input gate has, gets high voltage,
+then it connects the two other terminals.
+
+55
+00:03:44.950 --> 00:03:49.000
+If it gets a negative voltage inside,
+it disconnects the two terminals.
+
+56
+00:03:49.000 --> 00:03:50.620
+So let's see what happens.
+
+57
+00:03:50.620 --> 00:03:56.210
+If both a and b are one, then we get
+the high voltage here, high voltage here.
+
+58
+00:03:56.210 --> 00:03:59.110
+These two terminals are connected
+by this transistor.
+
+59
+00:03:59.110 --> 00:04:01.720
+These two terminals are connected
+by this transistor.
+
+60
+00:04:01.720 --> 00:04:05.990
+So we get the connection all the way
+from the output, to negative.
+
+61
+00:04:05.990 --> 00:04:07.540
+And since this is a weak connection and
+
+62
+00:04:07.540 --> 00:04:12.290
+this is a strong connection, our output
+is going to be negative or zero.
+
+63
+00:04:12.290 --> 00:04:15.858
+As we want in a NAND gate, because when
+a NAND gets one and one as inputs,
+
+64
+00:04:15.858 --> 00:04:17.060
+it gets zero as output.
+
+65
+00:04:18.080 --> 00:04:22.150
+In any other case, one of these two
+inputs is going to be negative,
+
+66
+00:04:22.150 --> 00:04:23.860
+which means a low voltage.
+
+67
+00:04:23.860 --> 00:04:27.200
+That when these two connected to
+the low variable of voltage input,
+
+68
+00:04:27.200 --> 00:04:29.620
+it's going to disconnect
+the two terminals.
+
+69
+00:04:29.620 --> 00:04:30.310
+In which case,
+
+70
+00:04:30.310 --> 00:04:34.340
+there is not going to be a connection
+from the minus sign to the output.
+
+71
+00:04:34.340 --> 00:04:38.260
+And so, this weak connection to the plus
+is the one that's going to rule, and
+
+72
+00:04:38.260 --> 00:04:43.088
+we're going to get the plus output, which
+is exactly what we want in a NAND gate,
+
+73
+00:04:43.088 --> 00:04:44.380
+which is two.
+
+74
+00:04:44.380 --> 00:04:47.550
+So, this is a NMOS
+implementation of a NAND gate.
+
+75
+00:04:47.550 --> 00:04:48.930
+There are many other technologies.
+
+76
+00:04:48.930 --> 00:04:52.991
+This one is not used so
+much anymore, since the 70s or 80s.
+
+77
+00:04:52.991 --> 00:04:56.760
+And the important thing in this course is,
+we do not care about the technology.
+
+78
+00:04:56.760 --> 00:04:58.980
+We do not care neither about
+this implementation or
+
+79
+00:04:58.980 --> 00:05:00.850
+if there are any other implementation.
+
+80
+00:05:00.850 --> 00:05:05.730
+We want to abstract that away,
+away inside of gates that get true and
+
+81
+00:05:05.730 --> 00:05:08.970
+false and output true and false and
+we don't care how exactly.
+
+82
+00:05:10.350 --> 00:05:14.820
+>> So welcome back from the world
+of resistors and transistors.
+
+83
+00:05:14.820 --> 00:05:15.890
+And once again,
+
+84
+00:05:15.890 --> 00:05:20.700
+this is a level of detail that we are not
+going to get into in this course.
+
+85
+00:05:20.700 --> 00:05:23.790
+So here's the next question that we have.
+
+86
+00:05:23.790 --> 00:05:28.890
+And it's about hardware description
+languages, and, the question is.
+
+87
+00:05:28.890 --> 00:05:33.730
+How does the HDL that we used in
+this course, and in this week,
+
+88
+00:05:33.730 --> 00:05:40.000
+how does it compare to real HDL languages
+that hardware engineers normally use?
+
+89
+00:05:40.000 --> 00:05:45.500
+Well first of all, our HDL is a very
+real language, because you can use it to
+
+90
+00:05:45.500 --> 00:05:50.980
+design computers and simulate computers,
+and that's what HDLs are all about.
+
+91
+00:05:50.980 --> 00:05:58.900
+At the same time obviously, industrial
+strength HDL languages like Verilog and
+
+92
+00:05:58.900 --> 00:06:03.520
+VHDL are far more complex and
+powerful than our HDL.
+
+93
+00:06:05.140 --> 00:06:09.320
+Typically they have
+a syntax which is some mix
+
+94
+00:06:09.320 --> 00:06:14.520
+of the HDL that we use and something that
+looks like the C programming language.
+
+95
+00:06:14.520 --> 00:06:19.460
+And they feature all sorts of high level
+programming constructs, like For and
+
+96
+00:06:19.460 --> 00:06:24.900
+While, which eliminate the need to
+write a lot of repetitive HDL code.
+
+97
+00:06:24.900 --> 00:06:27.660
+So it's very nice to
+use these capabilities.
+
+98
+00:06:27.660 --> 00:06:30.970
+And they also feature
+like our language does,
+
+99
+00:06:30.970 --> 00:06:36.360
+they feature the ability to model and
+simulate the notion of time and clocks.
+
+100
+00:06:36.360 --> 00:06:39.690
+Without which, you wouldn't be
+able to build sequential logic.
+
+101
+00:06:39.690 --> 00:06:44.430
+You know, logic that ends up with which,
+
+102
+00:06:44.430 --> 00:06:48.730
+with which you end up building things like
+memories and and counters, and so on.
+
+103
+00:06:48.730 --> 00:06:50.365
+So these languages are very nice.
+
+104
+00:06:50.365 --> 00:06:53.880
+At the same time,
+they are quite complicated and
+
+105
+00:06:53.880 --> 00:06:59.193
+would, it would take you at
+least a month or so to master
+
+106
+00:06:59.193 --> 00:07:04.090
+the these languages in order to begin
+writing some code for this course.
+
+107
+00:07:04.090 --> 00:07:09.770
+So as an alternative, Norm and I decide
+to, decided to design a very simple
+
+108
+00:07:09.770 --> 00:07:14.922
+dialect or very simple version of HDL and
+offer it to you.
+
+109
+00:07:14.922 --> 00:07:18.073
+It has all of the capabilities
+that we need in order to build
+
+110
+00:07:18.073 --> 00:07:22.950
+the computer that we will build in this
+course, and you can learn it in one hour.
+
+111
+00:07:22.950 --> 00:07:25.950
+The next question, which is for Norm,
+
+112
+00:07:25.950 --> 00:07:31.350
+is as follows the chips that we built so
+far were quite simple.
+
+113
+00:07:31.350 --> 00:07:36.980
+How does one go about designing complex
+chips containing hundreds of parts and
+
+114
+00:07:36.980 --> 00:07:37.570
+connections?
+
+115
+00:07:37.570 --> 00:07:40.964
+>> Well, the truth is [COUGH] that there
+is no simple general way of designing
+
+116
+00:07:40.964 --> 00:07:41.920
+complex circuits.
+
+117
+00:07:41.920 --> 00:07:44.416
+It's really a complicated
+design challenge, and
+
+118
+00:07:44.416 --> 00:07:47.160
+you need human ingenuity to do it well.
+
+119
+00:07:47.160 --> 00:07:50.830
+Now there are many techniques that
+you learn in in digital circuit
+
+120
+00:07:50.830 --> 00:07:53.050
+digital circuit construction courses.
+
+121
+00:07:53.050 --> 00:07:54.500
+For example, there are techniques for
+
+122
+00:07:54.500 --> 00:07:59.380
+card no maps that allows you to optimize
+a gate with a small number of inputs.
+
+123
+00:07:59.380 --> 00:08:01.120
+Sometimes you can use various tools.
+
+124
+00:08:01.120 --> 00:08:03.030
+For example,
+there are so-called silicon compilers,
+
+125
+00:08:03.030 --> 00:08:05.882
+where you specify what
+the functionality is that you want.
+
+126
+00:08:05.882 --> 00:08:09.590
+And the silicon compiler already
+has inside it a lot of logic and
+
+127
+00:08:09.590 --> 00:08:12.350
+a lot of algorithms that
+can optimize gates for you.
+
+128
+00:08:12.350 --> 00:08:14.748
+But again, this is,
+it is not perfect algorithms.
+
+129
+00:08:14.748 --> 00:08:18.690
+These are all heuristics because the
+general problem of so-called NP complete,
+
+130
+00:08:18.690 --> 00:08:21.650
+you cannot find a computer
+program that does it perfectly.
+
+131
+00:08:23.260 --> 00:08:26.050
+The real answer is,
+is that after all these tools and
+
+132
+00:08:26.050 --> 00:08:29.070
+all these techniques and so
+on, at the end of the day,
+
+133
+00:08:29.070 --> 00:08:33.390
+you use the usual tools of computer
+science modularity and abstraction.
+
+134
+00:08:33.390 --> 00:08:35.610
+You break a complex problem
+into simpler parts, and
+
+135
+00:08:35.610 --> 00:08:39.240
+the simpler parts are simpler
+to optimize and to construct.
+
+136
+00:08:39.240 --> 00:08:42.460
+And at the end of the day,
+after you use all your tools,
+
+137
+00:08:42.460 --> 00:08:48.400
+after you use all your techniques, you go
+back and use this modularity at the idea.
+
+138
+00:08:48.400 --> 00:08:52.150
+>> So these were the questions that
+we chose to focus on in this first
+
+139
+00:08:52.150 --> 00:08:56.310
+perspective unit of week one.
+
+140
+00:08:56.310 --> 00:09:01.740
+As you can see, this particular format
+of the perspective unit is open-ended.
+
+141
+00:09:01.740 --> 00:09:05.210
+There are numerous
+questions that can come up.
+
+142
+00:09:05.210 --> 00:09:08.740
+Once again, we don't want to deal with
+the level of transistors and resistors.
+
+143
+00:09:08.740 --> 00:09:12.230
+You know, this is something that
+belongs to electrical engineering.
+
+144
+00:09:12.230 --> 00:09:14.620
+We want to focus on computer science.
+
+145
+00:09:14.620 --> 00:09:16.680
+And when it comes to hardware
+technologies and so on,
+
+146
+00:09:16.680 --> 00:09:21.430
+there are many questions that Norm and
+I cannot answer either.
+
+147
+00:09:21.430 --> 00:09:26.160
+So we are we welcome any
+questions that can come up.
+
+148
+00:09:26.160 --> 00:09:30.110
+You can post these questions
+on the course Q&A forum.
+
+149
+00:09:30.110 --> 00:09:35.089
+And if there are other students who are
+who have some knowledge about these areas
+
+150
+00:09:35.089 --> 00:09:39.817
+you are perfectly welcome to go to the Q &
+A forum of the website of this course and
+
+151
+00:09:39.817 --> 00:09:41.795
+answer these questions on your own.
